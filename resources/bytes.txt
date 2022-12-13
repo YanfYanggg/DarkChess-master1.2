@@ -1,0 +1,23 @@
+文件在硬盘里以字节byte的形式存储
+Java内存是以字符的形式存储的（char）
+
+
+可以用fileReader来读取文件
+FileInputStream：文件输入流，访问硬盘里的文件并以字节的形式读入内存。
+InputStreamReader：将字节流转化为字符流
+fileReader：extends InputStreamReader：相当于整合了FileInputStream里面InputStreamReader的功能
+
+可以用fileWriter来写文件
+fileWriter可以把字符流转化为字节流，并访问硬盘写入到文件中
+在访问硬盘前，线把即将写入硬盘的内容写在缓冲区里
+最后一次性访问并写入硬盘（提高效率）
+也可以用库写入文件
+
+假设文件很长，读取效率低：
+BufferedReader：缓冲区，内置char类型数组，可支持访问一次硬盘，批量读入很多字节并将其转化为字符存储在BufferReader中
+访问内存消耗不大，但访问一次硬盘消耗大！
+
+try catch：异常处理：
+try{可能会发生异常的代码}（在发生异常的时候跳过去）
+catch{捕获异常}
+继续进行
