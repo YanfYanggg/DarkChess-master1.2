@@ -15,6 +15,9 @@ public class ChessGameFrame extends JFrame {
     private final int WIDTH;
     private final int HEIGHT;
     public final int CHESSBOARD_SIZE;
+
+    public JTextField redCredit = new JTextField("0",2);
+    public JTextField blackCredit = new JTextField("0",2);
     private GameController gameController;
     private static JLabel beginLabel;
 
@@ -92,7 +95,6 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
     }
-
     /**
      * 按下按钮输入读档路径
      */
@@ -130,8 +132,7 @@ public class ChessGameFrame extends JFrame {
         setVisible(true);
     }
 
-    private void addRedCredit(){//先能getScore，然后加Score变化监听器：ValueNotifier？执行结果text相应改变
-        JTextField redCredit = new JTextField("0",2);
+    private void addRedCredit(){
         redCredit.setFont(new Font("Rockwell", Font.BOLD, 25));
         redCredit.setLocation(WIDTH * 5 / 8, 350);
         redCredit.setSize(40,40);
@@ -139,7 +140,6 @@ public class ChessGameFrame extends JFrame {
         setVisible(true);
     }
     private void addBlackCredit(){
-        JTextField blackCredit = new JTextField("0",2);
         blackCredit.setFont(new Font("Rockwell", Font.BOLD, 25));
         blackCredit.setLocation(WIDTH * 8 / 9, 350);
         blackCredit.setSize(40,40);
@@ -227,4 +227,5 @@ public class ChessGameFrame extends JFrame {
         add(Cannon);
         setVisible(true);
     }
+
 }

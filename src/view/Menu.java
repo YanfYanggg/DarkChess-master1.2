@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Menu extends JFrame implements ActionListener {
+    public static ChessGameFrame chessGameFrame;
     private final int WIDTH;
     private final int HEIGHT;
     private JButton Game_Start;
@@ -77,6 +78,7 @@ public class Menu extends JFrame implements ActionListener {
             this.dispose();
 
             ChessGameFrame mainFrame = new ChessGameFrame(720, 720);
+            chessGameFrame = mainFrame;
 
             mainFrame.setVisible(true);//想改在后2句加。
 

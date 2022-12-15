@@ -140,6 +140,10 @@ public class Chessboard extends JComponent {
         //只重新绘制chess1 chess2，其他不变
         chess1.repaint();
         chess2.repaint();
+        String s1 = String.valueOf(getRed_score());
+        String s2 = String.valueOf(getBlack_score());
+        Menu.chessGameFrame.redCredit.setText(s1);
+        Menu.chessGameFrame.blackCredit.setText(s2);
     }
 
     //增加一个方法，先弄出一个list，再按list中的数字给棋子初始化
