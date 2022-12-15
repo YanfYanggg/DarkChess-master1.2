@@ -4,6 +4,8 @@ import controller.GameController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * 这个类表示游戏窗体，窗体上包含：
@@ -11,10 +13,12 @@ import java.awt.*;
  * 2 JLabel:  标签
  * 3 JButton： 按钮
  */
-public class ChessGameFrame extends JFrame {
+public class ChessGameFrame extends JFrame implements ActionListener {
     private final int WIDTH;
     private final int HEIGHT;
     public final int CHESSBOARD_SIZE;
+
+    private JButton Cheat;
 
     public JTextField redCredit = new JTextField("0",2);
     public JTextField blackCredit = new JTextField("0",2);
@@ -116,14 +120,26 @@ public class ChessGameFrame extends JFrame {
             gameController.loadGameFromFile(path);
         });
     }
-    private void addCheatingBottom(){
-        JButton button = new JButton("Cheat");
-        button.setLocation(WIDTH*3/5 + 50, HEIGHT / 10 + 200);
-        button.setSize(80,60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        button.setBackground(Color.blue);//为什么没颜色？
-        add(button);
-    }
+    private void addCheatingBottom() {
+        Cheat = new JButton("Cheat");
+        Cheat.setLocation(WIDTH * 3 / 5 + 50, HEIGHT / 10 + 200);
+        Cheat.setSize(80, 60);
+        Cheat.setFont(new Font("Rockwell", Font.BOLD, 20));
+        Cheat.setBackground(Color.blue);//为什么没颜色？
+        add(Cheat);
+        Cheat.addActionListener(this);
+        setVisible(true);}
+        public void actionPerformed (ActionEvent e){//跳转界面
+
+            if (e.getSource() == Cheat) {
+                JFrame cheatingFrame = new JFrame("Cheating Frame");
+                cheatingFrame.setLayout(null);
+                cheatingFrame.setSize(540,540);
+                cheatingFrame.setVisible(true);
+            }
+
+        }
+
 
     private void addRedName() {
         JLabel chess = new JLabel("Red");
