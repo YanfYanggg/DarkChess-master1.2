@@ -46,7 +46,7 @@ public class ChessGameFrame extends JFrame {
         addBlackKilled();
 
         //增加背景图片（最后）
-        ImageIcon bg = new ImageIcon("/Users/shellyli/Desktop/南方科技大学/22秋季/计算机-陶伊达，朱悦铭/project/DarkChess-master/imgs/GamePicture.png");
+        ImageIcon bg = new ImageIcon("imgs/GamePicture.png");
         JLabel label = new JLabel(bg);
         label.setSize(bg.getIconWidth(), bg.getIconHeight());
         this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
@@ -84,19 +84,19 @@ public class ChessGameFrame extends JFrame {
     /**
      * 在游戏窗体中增加一个按钮，如果按下的话就会显示是否重新开始游戏
      */
-//这里重写了  重新开始游戏  方法  需要改：点×取消的时候也会repaint!!
     private void addRestartButton() {
         JButton button = new JButton("Restart");
         button.addActionListener((e) -> {
             int value=JOptionPane.showConfirmDialog(null, "你确定要重新开始吗？", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (value==JOptionPane.YES_OPTION) {
                 gameController.restartGame();
-                    }
+            }
         });
         button.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 60);
         button.setSize(180, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
+        setVisible(true);
     }
     /**
      * 按下按钮输入读档路径
@@ -119,9 +119,9 @@ public class ChessGameFrame extends JFrame {
     private void addCheatingBottom(){
         JButton button = new JButton("Cheat");
         button.setLocation(WIDTH*3/5 + 50, HEIGHT / 10 + 200);
-        button.setSize(100,60);
+        button.setSize(80,60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        button.setBackground(Color.GREEN);
+        button.setBackground(Color.blue);//为什么没颜色？
         add(button);
     }
 

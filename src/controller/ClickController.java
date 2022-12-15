@@ -7,6 +7,8 @@ import model.ChessColor;
 import view.ChessGameFrame;
 import view.Chessboard;
 
+import java.io.IOException;
+
 public class ClickController {
     private final Chessboard chessboard;
     private SquareComponent first;
@@ -101,12 +103,6 @@ public class ClickController {
 
     //要更改swap  这个地方还有问题，但不一定是这个方法
     public void swapPlayer() {
-//        if (chessboard.getCurrentColor()==ChessColor.BLACK){
-//            chessboard.setCurrentColor(ChessColor.RED);
-//        }
-//        else if (chessboard.getCurrentColor()==ChessColor.RED){
-//            chessboard.setCurrentColor(ChessColor.BLACK);
-//        }
         chessboard.setCurrentColor(chessboard.getCurrentColor() == ChessColor.BLACK ? ChessColor.RED : ChessColor.BLACK);
         ChessGameFrame.getBeginLabel().setText(String.format("%s's TURN", chessboard.getCurrentColor().getName()));
         if (ShiFouYiHuiHe){
@@ -115,6 +111,5 @@ public class ClickController {
         }else {
             ShiFouYiHuiHe=true;
         }
-        System.out.println(progress);
     }
 }

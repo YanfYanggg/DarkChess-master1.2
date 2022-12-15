@@ -42,7 +42,7 @@ public class Menu extends JFrame implements ActionListener {
          */
 
         //1.把图片添加到标签里（把标签的大小设为和图片大小相同），把标签放在分层面板的最底层；
-        ImageIcon bg=new ImageIcon("/Users/shellyli/Desktop/南方科技大学/22秋季/计算机-陶伊达，朱悦铭/project/DarkChess-master/imgs/chessMenu4.jpeg");
+        ImageIcon bg=new ImageIcon("imgs/chessMenu4.jpeg");
         JLabel label=new JLabel(bg);
         label.setSize(bg.getIconWidth(),bg.getIconHeight());
         this.getLayeredPane().add(label,new Integer(Integer.MIN_VALUE));
@@ -80,7 +80,7 @@ public class Menu extends JFrame implements ActionListener {
             ChessGameFrame mainFrame = new ChessGameFrame(720, 720);
             chessGameFrame = mainFrame;
 
-            mainFrame.setVisible(true);//想改在后2句加。
+            mainFrame.setVisible(true);
 
         }
 
