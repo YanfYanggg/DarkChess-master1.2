@@ -1,6 +1,7 @@
 package controller;
 
 import view.Chessboard;
+import view.Menu;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -37,7 +38,9 @@ public class GameController {
     public void restartGame() {
         chessboard.initAllChessOnBoard(chessboard.ChushihuaQiZi());
         chessboard.setBlack_score(0);
+        Menu.chessGameFrame.redCredit.setText("0");
         chessboard.setRed_score(0);
+        Menu.chessGameFrame.blackCredit.setText("0");
         chessboard.clickController.setProgress(1);
         chessboard.clickController.setShiFouYiHuiHe(false);
     }

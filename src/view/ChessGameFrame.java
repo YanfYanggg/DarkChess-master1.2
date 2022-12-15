@@ -37,6 +37,7 @@ public class ChessGameFrame extends JFrame {
         addLabel();
         addRestartButton();
         addLoadButton();
+        addCheatingBottom();
         addRedName();
         addBlackName();
         addRedCredit();
@@ -83,12 +84,14 @@ public class ChessGameFrame extends JFrame {
     /**
      * 在游戏窗体中增加一个按钮，如果按下的话就会显示是否重新开始游戏
      */
-//这里重写了  重新开始游戏  方法  需要改：点×取消的时候也会repaint
+//这里重写了  重新开始游戏  方法  需要改：点×取消的时候也会repaint!!
     private void addRestartButton() {
         JButton button = new JButton("Restart");
         button.addActionListener((e) -> {
-            JOptionPane.showMessageDialog(this, "你确定要重新开始吗？");
-            gameController.restartGame();
+            int value=JOptionPane.showConfirmDialog(null, "你确定要重新开始吗？", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (value==JOptionPane.YES_OPTION) {
+                gameController.restartGame();
+                    }
         });
         button.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 60);
         button.setSize(180, 60);
@@ -113,6 +116,14 @@ public class ChessGameFrame extends JFrame {
             gameController.loadGameFromFile(path);
         });
     }
+    private void addCheatingBottom(){
+        JButton button = new JButton("Cheat");
+        button.setLocation(WIDTH*3/5 + 50, HEIGHT / 10 + 200);
+        button.setSize(100,60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setBackground(Color.GREEN);
+        add(button);
+    }
 
     private void addRedName() {
         JLabel chess = new JLabel("Red");
@@ -135,14 +146,14 @@ public class ChessGameFrame extends JFrame {
     private void addRedCredit(){
         redCredit.setFont(new Font("Rockwell", Font.BOLD, 25));
         redCredit.setLocation(WIDTH * 5 / 8, 350);
-        redCredit.setSize(40,40);
+        redCredit.setSize(45,40);
         add(redCredit);
         setVisible(true);
     }
     private void addBlackCredit(){
         blackCredit.setFont(new Font("Rockwell", Font.BOLD, 25));
         blackCredit.setLocation(WIDTH * 8 / 9, 350);
-        blackCredit.setSize(40,40);
+        blackCredit.setSize(45,40);
         add(blackCredit);
         setVisible(true);
     }
