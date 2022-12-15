@@ -4,6 +4,7 @@ import controller.ClickController;
 import model.ChessColor;
 import model.ChessboardPoint;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -14,9 +15,9 @@ public class ChariotChessComponent extends ChessComponent {
     public ChariotChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor chessColor, ClickController clickController, int size) {
         super(chessboardPoint, location, chessColor, clickController, size);
         if (this.getChessColor() == ChessColor.RED) {
-            name = "俥";
+            name = new ImageIcon("imgs/红车.png").getImage();
         } else {
-            name = "車";
+            name = new ImageIcon("imgs/黑车.png").getImage();
         }
         rank=3;
     }

@@ -4,13 +4,15 @@ import controller.ClickController;
 import model.ChessColor;
 import model.ChessboardPoint;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 /**
  * 表示棋盘上非空棋子的格子，是所有非空棋子的父类
  */
 public class ChessComponent extends SquareComponent{
-    protected String name;// 棋子名字：例如 兵，卒，士等
+    protected Image name;// 棋子名字：例如 兵，卒，士等
     //如果要放图片的话就要变成image属性
 
     protected ChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor chessColor, ClickController clickController, int size) {
@@ -28,9 +30,7 @@ public class ChessComponent extends SquareComponent{
 
         if (isReversal) {
             //绘制棋子文字
-            g.setColor(this.getChessColor().getColor());
-            g.setFont(CHESS_FONT);
-            g.drawString(this.name, this.getWidth() / 4, this.getHeight() * 2 / 3);
+            g.drawImage(this.name, this.getWidth() / 11, this.getHeight() / 11, null);
 
             //绘制棋子被选中时状态
             if (isSelected()) {
