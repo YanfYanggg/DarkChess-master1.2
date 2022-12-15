@@ -2,6 +2,7 @@ package controller;
 
 import view.Chessboard;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,6 +24,8 @@ public class GameController {
     public List<String> loadGameFromFile(String path) {
         try {
             List<String> chessData = Files.readAllLines(Path.of(path));
+            //todo:error check
+            JOptionPane.showMessageDialog(chessboard,"error 101");
             chessboard.loadGame(chessData);
             return chessData;
         } catch (IOException e) {
