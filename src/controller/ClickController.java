@@ -101,7 +101,7 @@ public class ClickController {
         ShiFouYiHuiHe = shiFouYiHuiHe;
     }
 
-    //要更改swap  这个地方还有问题，但不一定是这个方法
+
     public void swapPlayer() {
         chessboard.setCurrentColor(chessboard.getCurrentColor() == ChessColor.BLACK ? ChessColor.RED : ChessColor.BLACK);
         ChessGameFrame.getBeginLabel().setText(String.format("%s's TURN", chessboard.getCurrentColor().getName()));
