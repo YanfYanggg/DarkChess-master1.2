@@ -27,7 +27,7 @@ public class GameController {
             List<String> chessData = Files.readAllLines(Path.of(path));
             //todo:error check
             JOptionPane.showMessageDialog(chessboard,"error 101");
-            chessboard.loadGame(chessData);
+            chessboard.loadGame2(chessData);
             return chessData;
         } catch (IOException e) {
             e.printStackTrace();
