@@ -2,6 +2,7 @@ package view;
 
 
 import chessComponent.*;
+import controller.GameController;
 import model.*;
 import controller.ClickController;
 
@@ -142,6 +143,7 @@ public class Chessboard extends JComponent implements Cloneable{
         String s2 = String.valueOf(getBlack_score());
         Menu.chessGameFrame.redCredit.setText(s1);
         Menu.chessGameFrame.blackCredit.setText(s2);
+        Menu.chessGameFrame.judgeWinner();
     }
 
     //增加一个方法，先弄出一个list，再按list中的数字给棋子初始化

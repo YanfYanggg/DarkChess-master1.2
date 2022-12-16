@@ -52,7 +52,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addBlackCredit();
         addRedKilled();
         addBlackKilled();
-
+        judgeWinner();
         //增加背景图片（最后）
         ImageIcon bg = new ImageIcon("imgs/GamePicture.png");
         BackLabel = new JLabel(bg);
@@ -286,4 +286,32 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * 写胜利者判断
+     */
+    public void judgeWinner(){
+        if(chessboard1.getRed_score() >= 60){
+            int n = JOptionPane.showConfirmDialog(null, "红方胜利！是否开始新游戏？", "游戏结束", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (n == JOptionPane.YES_OPTION) {
+                gameController.restartGame();
+                addLabel();
+            }
+            if (n == JOptionPane.NO_OPTION) {
+                this.dispose();
+                Menu menu = new Menu(720, 720);
+                menu.setVisible(true);
+                }
+        }
+        if(chessboard1.getBlack_score() >= 60){
+            int n = JOptionPane.showConfirmDialog(null, "黑方胜利！是否开始新游戏？", "游戏结束", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (n == JOptionPane.YES_OPTION) {
+                gameController.restartGame();
+            }
+            if (n == JOptionPane.NO_OPTION) {
+                this.dispose();
+                Menu menu = new Menu(720, 720);
+                menu.setVisible(true);
+            }
+        }
+    }
 }
