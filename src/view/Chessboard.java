@@ -2,18 +2,12 @@ package view;
 
 
 import chessComponent.*;
-//import chessComponent.EmptySlotComponent;
-//import chessComponent.SoldierChessComponent;
-//import chessComponent.SquareComponent;
 import model.*;
 import controller.ClickController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.List;
 
@@ -21,11 +15,11 @@ import java.util.List;
  * 这个类表示棋盘组建，其包含：
  * SquareComponent[][]: 4*8个方块格子组件
  */
-public class Chessboard extends JComponent {
+public class Chessboard extends JComponent implements Cloneable{
     private static final int ROW_SIZE = 8;
     private static final int COL_SIZE = 4;
 
-    private final SquareComponent[][] squareComponents = new SquareComponent[ROW_SIZE][COL_SIZE];
+    private SquareComponent[][] squareComponents = new SquareComponent[ROW_SIZE][COL_SIZE];
     //todo: you can change the initial player
     private ChessColor currentColor = ChessColor.BLACK;
 
@@ -46,7 +40,7 @@ public class Chessboard extends JComponent {
 
     public SquareComponent[][] getChessComponents() {
         return squareComponents;
-    }
+    }//二维数组
 
     public ChessColor getCurrentColor() {
         return currentColor;
@@ -156,8 +150,8 @@ public class Chessboard extends JComponent {
         for (int i = 0; i < 32; i++) {
             ChushihuaQiZi2.add(i);
         }
-        Collections.shuffle(ChushihuaQiZi2);
-        List<String> ChushihuaQiZi = new ArrayList<>();
+        Collections.shuffle(ChushihuaQiZi2);//默认随机重排
+        List<String> ChushihuaQiZi = new ArrayList<>();//此处根据重排后的序号进行布棋
         for (int i = 0; i < 32; i++) {
             if (ChushihuaQiZi2.get(i) < 5) {
                 ChushihuaQiZi.add("R1");
@@ -201,7 +195,7 @@ public class Chessboard extends JComponent {
                 if (ChushihuaQiZi.get(4 * i + j).charAt(0) == 'R') {
                     color = ChessColor.RED;
                 } else color = ChessColor.BLACK;
-                if (ChushihuaQiZi.get(4 * i + j).charAt(1) == '1') {
+                if (ChushihuaQiZi.get(4 * i + j).charAt(1) == '1') {//第i行，第j个
                     squareComponent = new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), color, clickController, CHESS_SIZE);
                 } else if (ChushihuaQiZi.get(4 * i + j).charAt(1) == '2') {
                     squareComponent = new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), color, clickController, CHESS_SIZE);
@@ -222,6 +216,45 @@ public class Chessboard extends JComponent {
         }
         repaint();
     }
+    /**
+     * 写cheating mode
+     */
+    public List<String> ReverseRecord(){
+        List<String> NotReverse = new ArrayList<>();
+        for(int i = 0; i < squareComponents.length; i++){
+            for(int j = 0; j < squareComponents[i].length; j++){
+                if(squareComponents[i][j].isReversal() == false){
+                    String s1 = String.format("%d %d",i,j);
+                    NotReverse.add(s1);
+                }
+            }
+        }
+        return NotReverse;
+    }
+
+    public void CheatReverse(){
+        for(int i = 0; i < squareComponents.length; i++){
+            for(int j = 0; j < squareComponents[i].length; j++){
+                if (squareComponents[i][j].isReversal() == false){
+                    squareComponents[i][j].setReversal(true);
+                }
+            }
+        }
+    }
+    public void ReverseAgain(List<String> arr1){
+        for(int a = 0; a < arr1.size(); a++){
+            String[] arr2 = arr1.get(a).split("\\s");
+            int x = Integer.parseInt(arr2[0]);
+            int y = Integer.parseInt(arr2[1]);
+            for(int i = 0; i < squareComponents.length; i++){
+                for(int j = 0; j < squareComponents[i].length; j++){
+                    if(i == x && j == y)
+                        squareComponents[i][j].setReversal(false);
+                    }
+                }
+            }
+        }
+
 
     /**
      * 绘制棋盘格子

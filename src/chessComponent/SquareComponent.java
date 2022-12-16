@@ -16,7 +16,16 @@ import java.awt.event.MouseEvent;
  * 1. EmptySlotComponent: 空棋子
  * 2. ChessComponent: 表示非空棋子
  */
-public abstract class SquareComponent extends JComponent {
+public abstract class SquareComponent extends JComponent implements Cloneable{
+    public Object clone(){
+        Object obj = null;
+        try {
+            obj = super.clone();
+        } catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return obj;
+    }
 
     private static final Color squareColor = new Color(250, 220, 190);
     protected static int spacingLength;
@@ -46,9 +55,9 @@ public abstract class SquareComponent extends JComponent {
 
     protected SquareComponent(ChessboardPoint chessboardPoint, Point location, ChessColor chessColor, ClickController clickController, int size) {
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
-        setLocation(location);
+        setLocation(location);//点的窗口坐标（用calculatePoint计算）
         setSize(size, size);
-        this.chessboardPoint = chessboardPoint;
+        this.chessboardPoint = chessboardPoint;//棋盘位置坐标
         this.chessColor = chessColor;
         this.selected = false;
         this.clickController = clickController;

@@ -11,7 +11,7 @@ import java.awt.image.ImageObserver;
 /**
  * 表示棋盘上非空棋子的格子，是所有非空棋子的父类
  */
-public class ChessComponent extends SquareComponent{
+public class ChessComponent extends SquareComponent {
     protected Image name;// 棋子名字：例如 兵，卒，士等
     //如果要放图片的话就要变成image属性
 

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * 这个类表示游戏窗体，窗体上包含：
@@ -14,12 +15,15 @@ import java.awt.event.ActionListener;
  * 3 JButton： 按钮
  */
 public class ChessGameFrame extends JFrame implements ActionListener {
+    public JLabel BackLabel;
+    public Chessboard chessboard1;
+    public JFrame CheatingFrame;
+    public ArrayList<String> target;
     private final int WIDTH;
     private final int HEIGHT;
     public final int CHESSBOARD_SIZE;
-
+    private JButton close;
     private JButton Cheat;
-
     public JTextField redCredit = new JTextField("0",2);
     public JTextField blackCredit = new JTextField("0",2);
     private GameController gameController;
@@ -51,11 +55,11 @@ public class ChessGameFrame extends JFrame implements ActionListener {
 
         //增加背景图片（最后）
         ImageIcon bg = new ImageIcon("imgs/GamePicture.png");
-        JLabel label = new JLabel(bg);
-        label.setSize(bg.getIconWidth(), bg.getIconHeight());
-        this.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
-        label.setBounds(0, 0, bg.getIconWidth(), bg.getIconHeight());
-        add(label);
+        BackLabel = new JLabel(bg);
+        BackLabel.setSize(bg.getIconWidth(), bg.getIconHeight());
+        this.getLayeredPane().add(BackLabel, new Integer(Integer.MIN_VALUE));
+        BackLabel.setBounds(0, 0, bg.getIconWidth(), bg.getIconHeight());
+        add(BackLabel);
         this.setVisible(true);
     }
 
@@ -65,6 +69,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
      */
     private void addChessboard() {
         Chessboard chessboard = new Chessboard(CHESSBOARD_SIZE / 2, CHESSBOARD_SIZE);
+        chessboard1 = chessboard;
         gameController = new GameController(chessboard);
         chessboard.setLocation(HEIGHT / 10, HEIGHT / 10);
         add(chessboard);
@@ -120,26 +125,52 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             gameController.loadGameFromFile(path);
         });
     }
+
+    /**
+     * 作弊模式
+     */
     private void addCheatingBottom() {
         Cheat = new JButton("Cheat");
-        Cheat.setLocation(WIDTH * 3 / 5 + 50, HEIGHT / 10 + 200);
+        close = new JButton("Close");
+        Cheat.setLocation(WIDTH * 3 / 5 + 10, HEIGHT / 10 + 200);
+        close.setLocation(WIDTH * 3 / 5 + 90, HEIGHT / 10 + 200);
         Cheat.setSize(80, 60);
+        close.setSize(80,60);
         Cheat.setFont(new Font("Rockwell", Font.BOLD, 20));
+        close.setFont(new Font("Rockwell", Font.BOLD, 20));
         Cheat.setBackground(Color.blue);//为什么没颜色？
         add(Cheat);
-        Cheat.addActionListener(this);
-        setVisible(true);}
-        public void actionPerformed (ActionEvent e){//跳转界面
-
+        add(close);
+        Cheat.addActionListener(this::actionPerformed);
+        close.addActionListener(this::actionPerformed);
+        setVisible(true);
+    }
+        public void actionPerformed (ActionEvent e){//不要点2次cheat！!
             if (e.getSource() == Cheat) {
-                JFrame cheatingFrame = new JFrame("Cheating Frame");
-                cheatingFrame.setLayout(null);
-                cheatingFrame.setSize(540,540);
-                cheatingFrame.setVisible(true);
+                CheatingFrame = new JFrame("Cheating Frame");
+                JLabel label = new JLabel(" 看完记得赶紧close～不要被对手发现啦！");
+                label.setFont(new Font("Rockwell", Font.BOLD, 15));
+                label.setSize(1000,100);
+                CheatingFrame.add(label);
+                CheatingFrame.setSize(540,720);
+                CheatingFrame.setLayout(null);
+                CheatingFrame.setVisible(true);
+                target = (ArrayList<String>) chessboard1.ReverseRecord();
+                chessboard1.CheatReverse();
+                CheatingFrame.add(chessboard1);
+                setVisible(true);
             }
-
+            if(e.getSource() == close){
+                CheatingFrame.remove(chessboard1);
+                repaint();
+                CheatingFrame.dispose();
+                chessboard1.ReverseAgain(target);
+                BackLabel.add(chessboard1);
+                chessboard1.setVisible(true);
+                repaint();
+                setVisible(true);
+            }
         }
-
 
     private void addRedName() {
         JLabel chess = new JLabel("Red");
