@@ -28,6 +28,36 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     public JTextField blackCredit = new JTextField("0",2);
     private GameController gameController;
     private static JLabel beginLabel;
+    int countRA = 0;
+    int countRM = 0;
+    int countRChe = 0;
+    int countRH = 0;
+    int countRS = 0;
+    int countRPao = 0;
+    int countBA = 0;
+    int countBM = 0;
+
+    int countBChe = 0;
+
+    int countBH = 0;
+
+    int countBS = 0;
+
+    int countBPao = 0;
+    JTextField RGeneral = new JTextField("0");
+    JTextField RAdvisor = new JTextField("0");
+    JTextField RMinister = new JTextField("0");
+    JTextField RChariot = new JTextField("0");
+    JTextField RHorse = new JTextField("0");
+    JTextField RSoldier = new JTextField("0");
+    JTextField RCannon = new JTextField("0");
+    JTextField BGeneral = new JTextField("0");
+    JTextField BAdvisor = new JTextField("0");
+    JTextField BMinister = new JTextField("0");
+    JTextField BChariot = new JTextField("0");
+    JTextField BHorse = new JTextField("0");
+    JTextField BSoldier = new JTextField("0");
+    JTextField BCannon = new JTextField("0");
 
     public ChessGameFrame(int width, int height) {
         setTitle("2022 CS109 Project Demo"); //设置标题
@@ -173,19 +203,19 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         }
 
     private void addRedName() {
-        JLabel chess = new JLabel("Red");
+        JLabel chess = new JLabel("Red Killed");
         chess.setForeground(Color.RED);
-        chess.setSize(100, 100);
+        chess.setSize(1000, 100);
         chess.setFont(new Font("Rockwell", Font.BOLD, 20));
-        chess.setLocation(WIDTH * 5 / 8, HEIGHT * 1/2);
+        chess.setLocation(WIDTH * 5 / 8 - 50, HEIGHT * 1/2);
         add(chess);
         setVisible(true);
     }
     private void addBlackName() {
-        JLabel chess = new JLabel("Black");
-        chess.setSize(100, 100);
+        JLabel chess = new JLabel("Black Killed");
+        chess.setSize(1000, 100);
         chess.setFont(new Font("Rockwell", Font.BOLD, 20));
-        chess.setLocation(WIDTH * 8 / 9, HEIGHT * 1/2);
+        chess.setLocation(WIDTH * 8 / 9 - 55, HEIGHT * 1/2);
         add(chess);
         setVisible(true);
     }
@@ -205,84 +235,155 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    private void addRedKilled() {//可能加一个被吃掉的eventListener然后setfield
-        //加文本框
-        JTextField General = new JTextField("0", 1);
-        JTextField Advisor = new JTextField("0", 1);
-        JTextField Minister = new JTextField("0", 1);
-        JTextField Chariot = new JTextField("0", 1);
-        JTextField Horse = new JTextField("0", 1);
-        JTextField Soldier = new JTextField("0", 1);
-        JTextField Cannon = new JTextField("0", 1);
+    private void addRedKilled() {
+        //加Label
+        JLabel General = new JLabel("帥");
+        General.setForeground(Color.RED);
         General.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Advisor.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Minister.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Chariot.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Horse.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Soldier.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Cannon.setFont(new Font("Rockwell", Font.BOLD, 18));
-        General.setLocation(WIDTH * 5 / 8, 600);
-        Advisor.setLocation(WIDTH * 5 / 8, 570);
-        Minister.setLocation(WIDTH * 5 / 8, 540);
-        Chariot.setLocation(WIDTH * 5 / 8, 510);
-        Horse.setLocation(WIDTH * 5 / 8, 480);
-        Soldier.setLocation(WIDTH * 5 / 8, 450);
-        Cannon.setLocation(WIDTH * 5 / 8, 420);
-        General.setSize(30, 30);
-        Advisor.setSize(30, 30);
-        Minister.setSize(30, 30);
-        Chariot.setSize(30, 30);
-        Horse.setSize(30, 30);
-        Soldier.setSize(30, 30);
-        Cannon.setSize(30, 30);
-        General.setEditable(false);//不知道有什么用
+        General.setLocation(WIDTH * 3 / 5 - 3,565);
+        General.setSize(100,100);
         add(General);
+        JLabel Advisor = new JLabel("仕");
+        Advisor.setForeground(Color.RED);
+        Advisor.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Advisor.setLocation(WIDTH * 3 / 5 - 3,535);
+        Advisor.setSize(100,100);
         add(Advisor);
+        JLabel Minister = new JLabel("相");
+        Minister.setForeground(Color.RED);
+        Minister.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Minister.setLocation(WIDTH * 3 / 5 - 3,505);
+        Minister.setSize(100,100);
         add(Minister);
-        add(Chariot);
+        JLabel Horse = new JLabel("傌");
+        Horse.setForeground(Color.RED);
+        Horse.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Horse.setLocation(WIDTH * 3 / 5 - 3,475);
+        Horse.setSize(100,100);
         add(Horse);
-        add(Soldier);
+        JLabel Chariot = new JLabel("俥");
+        Chariot.setForeground(Color.RED);
+        Chariot.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Chariot.setLocation(WIDTH * 3 / 5 - 3,445);
+        Chariot.setSize(100,100);
+        add(Chariot);
+        JLabel Cannon = new JLabel("炮");
+        Cannon.setForeground(Color.RED);
+        Cannon.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Cannon.setLocation(WIDTH * 3 / 5 - 3,415);
+        Cannon.setSize(100,100);
         add(Cannon);
+        JLabel Soldier = new JLabel("兵");
+        Soldier.setForeground(Color.RED);
+        Soldier.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Soldier.setLocation(WIDTH * 3 / 5 - 3,385);
+        Soldier.setSize(100,100);
+        add(Soldier);
+        RGeneral.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RAdvisor.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RMinister.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RChariot.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RHorse.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RSoldier.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RCannon.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RGeneral.setLocation(WIDTH * 5 / 8, 600);
+        RAdvisor.setLocation(WIDTH * 5 / 8, 570);
+        RMinister.setLocation(WIDTH * 5 / 8, 540);
+        RChariot.setLocation(WIDTH * 5 / 8, 510);
+        RHorse.setLocation(WIDTH * 5 / 8, 480);
+        RSoldier.setLocation(WIDTH * 5 / 8, 420);
+        RCannon.setLocation(WIDTH * 5 / 8, 450);
+        RGeneral.setSize(30, 30);
+        RAdvisor.setSize(30, 30);
+        RMinister.setSize(30, 30);
+        RChariot.setSize(30, 30);
+        RHorse.setSize(30, 30);
+        RSoldier.setSize(30, 30);
+        RCannon.setSize(30, 30);
+        RGeneral.setEditable(false);//不知道有什么用
+        add(RGeneral);
+        add(RAdvisor);
+        add(RMinister);
+        add(RChariot);
+        add(RHorse);
+        add(RSoldier);
+        add(RCannon);
         setVisible(true);
     }
     private void addBlackKilled() {//可能要加actionListener
-        //加文本框
-        JTextField General = new JTextField("0", 1);
-        JTextField Advisor = new JTextField("0", 1);
-        JTextField Minister = new JTextField("0", 1);
-        JTextField Chariot = new JTextField("0", 1);
-        JTextField Horse = new JTextField("0", 1);
-        JTextField Soldier = new JTextField("0", 1);
-        JTextField Cannon = new JTextField("0", 1);
+        //加Label
+        JLabel General = new JLabel("將");
+        General.setForeground(Color.BLACK);
         General.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Advisor.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Minister.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Chariot.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Horse.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Soldier.setFont(new Font("Rockwell", Font.BOLD, 18));
-        Cannon.setFont(new Font("Rockwell", Font.BOLD, 18));
-        General.setLocation(WIDTH * 8 / 9, 600);
-        Advisor.setLocation(WIDTH * 8 / 9, 570);
-        Minister.setLocation(WIDTH * 8 / 9, 540);
-        Chariot.setLocation(WIDTH * 8 / 9, 510);
-        Horse.setLocation(WIDTH * 8 / 9, 480);
-        Soldier.setLocation(WIDTH * 8 / 9, 450);
-        Cannon.setLocation(WIDTH * 8 / 9, 420);
-        General.setSize(30, 30);
-        Advisor.setSize(30, 30);
-        Minister.setSize(30, 30);
-        Chariot.setSize(30, 30);
-        Horse.setSize(30, 30);
-        Soldier.setSize(30, 30);
-        Cannon.setSize(30, 30);
-        General.setEditable(false);//不知道有什么用
+        General.setLocation(WIDTH * 8 / 9 - 20,565);
+        General.setSize(100,100);
         add(General);
+        JLabel Advisor = new JLabel("士");
+        Advisor.setForeground(Color.BLACK);
+        Advisor.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Advisor.setLocation(WIDTH * 8 / 9 - 20,535);
+        Advisor.setSize(100,100);
         add(Advisor);
+        JLabel Minister = new JLabel("象");
+        Minister.setForeground(Color.BLACK);
+        Minister.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Minister.setLocation(WIDTH * 8 / 9 - 20,505);
+        Minister.setSize(100,100);
         add(Minister);
-        add(Chariot);
+        JLabel Horse = new JLabel("馬");
+        Horse.setForeground(Color.BLACK);
+        Horse.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Horse.setLocation(WIDTH * 8 / 9 - 20,475);
+        Horse.setSize(100,100);
         add(Horse);
-        add(Soldier);
+        JLabel Chariot = new JLabel("車");
+        Chariot.setForeground(Color.BLACK);
+        Chariot.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Chariot.setLocation(WIDTH * 8 / 9 - 20,445);
+        Chariot.setSize(100,100);
+        add(Chariot);
+        JLabel Cannon = new JLabel("砲");
+        Cannon.setForeground(Color.BLACK);
+        Cannon.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Cannon.setLocation(WIDTH * 8 / 9 - 20,415);
+        Cannon.setSize(100,100);
         add(Cannon);
+        JLabel Soldier = new JLabel("卒");
+        Soldier.setForeground(Color.BLACK);
+        Soldier.setFont(new Font("Rockwell", Font.BOLD, 18));
+        Soldier.setLocation(WIDTH * 8 / 9 - 20,385);
+        Soldier.setSize(100,100);
+        add(Soldier);
+
+        BGeneral.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BAdvisor.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BMinister.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BChariot.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BHorse.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BSoldier.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BCannon.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BGeneral.setLocation(WIDTH * 8 / 9, 600);
+        BAdvisor.setLocation(WIDTH * 8 / 9, 570);
+        BMinister.setLocation(WIDTH * 8 / 9, 540);
+        BChariot.setLocation(WIDTH * 8 / 9, 510);
+        BHorse.setLocation(WIDTH * 8 / 9, 480);
+        BSoldier.setLocation(WIDTH * 8 / 9, 420);
+        BCannon.setLocation(WIDTH * 8 / 9, 450);
+        BGeneral.setSize(30, 30);
+        BAdvisor.setSize(30, 30);
+        BMinister.setSize(30, 30);
+        BChariot.setSize(30, 30);
+        BHorse.setSize(30, 30);
+        BSoldier.setSize(30, 30);
+        BCannon.setSize(30, 30);
+        BGeneral.setEditable(false);//不知道有什么用
+        add(BGeneral);
+        add(BAdvisor);
+        add(BMinister);
+        add(BChariot);
+        add(BHorse);
+        add(BSoldier);
+        add(BCannon);
         setVisible(true);
     }
 

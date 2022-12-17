@@ -120,14 +120,62 @@ public class Chessboard extends JComponent implements Cloneable{
     public void swapChessComponents(SquareComponent chess1, SquareComponent chess2) {
         // Note that chess1 has higher priority, 'destroys' chess2 if exists.
         if (!(chess2 instanceof EmptySlotComponent)) {
-            if (chess2.getChessColor() == ChessColor.BLACK) {
+            if (chess2.getChessColor() == ChessColor.BLACK) {//吃黑色的chess2
                 Red_score += AddHowMuchScore(chess2);
             }
-            if (chess2.getChessColor() == ChessColor.RED) {
+            if (chess2.getChessColor() == ChessColor.RED) {//吃红色的chess2
                 Black_score += AddHowMuchScore(chess2);
             }
             ChessBeEaten = chess2;
             remove(chess2);
+            if(ChessBeEaten.getChessColor() == ChessColor.RED) {
+                if (ChessBeEaten.getRank() == 1) {
+                    Menu.chessGameFrame.countRS++ ;
+                    Menu.chessGameFrame.RSoldier.setText(String.valueOf(Menu.chessGameFrame.countRS));
+                } else if (ChessBeEaten.getRank() == 2) {
+                    Menu.chessGameFrame.countRPao++ ;
+                    Menu.chessGameFrame.RCannon.setText(String.valueOf(Menu.chessGameFrame.countRPao));
+                } else if (ChessBeEaten.getRank() == 3) {
+                    Menu.chessGameFrame.countRChe++ ;
+                    Menu.chessGameFrame.RChariot.setText(String.valueOf(Menu.chessGameFrame.countRChe));
+                } else if (ChessBeEaten.getRank() == 4) {
+                    Menu.chessGameFrame.countRH++ ;
+                    Menu.chessGameFrame.RHorse.setText(String.valueOf(Menu.chessGameFrame.countRH));
+                } else if (ChessBeEaten.getRank() == 5) {
+                    Menu.chessGameFrame.countRM++ ;
+                    Menu.chessGameFrame.RMinister.setText(String.valueOf(Menu.chessGameFrame.countRM));
+                } else if (ChessBeEaten.getRank() == 6) {
+                    Menu.chessGameFrame.countRA++ ;
+                    Menu.chessGameFrame.RAdvisor.setText(String.valueOf(Menu.chessGameFrame.countRA));
+                } else {
+                    Menu.chessGameFrame.RGeneral.setText("1");
+                }
+            }
+            if(ChessBeEaten.getChessColor() == ChessColor.BLACK) {
+                if (ChessBeEaten.getRank() == 1) {
+                    Menu.chessGameFrame.countBS++ ;
+                    Menu.chessGameFrame.BSoldier.setText(String.valueOf(Menu.chessGameFrame.countBS));
+                } else if (ChessBeEaten.getRank() == 2) {
+                    Menu.chessGameFrame.countBPao++ ;
+                    Menu.chessGameFrame.BCannon.setText(String.valueOf(Menu.chessGameFrame.countBPao));
+                } else if (ChessBeEaten.getRank() == 3) {
+                    Menu.chessGameFrame.countBChe++ ;
+                    Menu.chessGameFrame.BChariot.setText(String.valueOf(Menu.chessGameFrame.countBChe));
+                } else if (ChessBeEaten.getRank() == 4) {
+                    Menu.chessGameFrame.countBH++ ;
+                    Menu.chessGameFrame.BHorse.setText(String.valueOf(Menu.chessGameFrame.countBH));
+                } else if (ChessBeEaten.getRank() == 5) {
+                    Menu.chessGameFrame.countBM++ ;
+                    Menu.chessGameFrame.BMinister.setText(String.valueOf(Menu.chessGameFrame.countBM));
+                } else if (ChessBeEaten.getRank() == 6) {
+                    Menu.chessGameFrame.countBA++ ;
+                    Menu.chessGameFrame.BAdvisor.setText(String.valueOf(Menu.chessGameFrame.countBA));
+                } else {
+                    Menu.chessGameFrame.BGeneral.setText("1");
+                }
+            }
+
+
             add(chess2 = new EmptySlotComponent(chess2.getChessboardPoint(), chess2.getLocation(), clickController, CHESS_SIZE));
         }
         chess1.swapLocation(chess2);
