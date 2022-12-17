@@ -173,11 +173,6 @@ public class Chessboard extends JComponent implements Cloneable{
                 } else {
                     Menu.chessGameFrame.BGeneral.setText("1");
                 }
-                try {
-                    saveGame();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
             }
 
 

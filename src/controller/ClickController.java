@@ -111,5 +111,10 @@ public class ClickController {
         }else {
             ShiFouYiHuiHe=true;
         }
+        try {
+            chessboard.saveGame();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
