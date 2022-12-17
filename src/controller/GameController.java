@@ -1,5 +1,6 @@
 package controller;
 
+import view.ChessGameFrame;
 import view.Chessboard;
 import view.Menu;
 
@@ -46,12 +47,7 @@ public class GameController {
     }
 
     public void restartGame() {
-        chessboard.initAllChessOnBoard(chessboard.ChushihuaQiZi());
-        chessboard.setBlack_score(0);
-        Menu.chessGameFrame.redCredit.setText("0");
-        chessboard.setRed_score(0);
-        Menu.chessGameFrame.blackCredit.setText("0");
-        chessboard.clickController.setProgress(1);
-        chessboard.clickController.setShiFouYiHuiHe(false);
+        Menu.chessGameFrame = new ChessGameFrame(720,720);
+
     }
 }

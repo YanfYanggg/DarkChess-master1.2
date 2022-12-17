@@ -2,18 +2,13 @@ package view;
 
 
 import chessComponent.*;
-//import chessComponent.EmptySlotComponent;
-//import chessComponent.SoldierChessComponent;
-//import chessComponent.SquareComponent;
+import controller.GameController;
 import model.*;
 import controller.ClickController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.List;
 
@@ -21,11 +16,11 @@ import java.util.List;
  * 这个类表示棋盘组建，其包含：
  * SquareComponent[][]: 4*8个方块格子组件
  */
-public class Chessboard extends JComponent {
+public class Chessboard extends JComponent implements Cloneable{
     private static final int ROW_SIZE = 8;
     private static final int COL_SIZE = 4;
 
-    private final SquareComponent[][] squareComponents = new SquareComponent[ROW_SIZE][COL_SIZE];
+    private SquareComponent[][] squareComponents = new SquareComponent[ROW_SIZE][COL_SIZE];
     //todo: you can change the initial player
     private ChessColor currentColor = ChessColor.BLACK;
 
@@ -46,7 +41,7 @@ public class Chessboard extends JComponent {
 
     public SquareComponent[][] getChessComponents() {
         return squareComponents;
-    }
+    }//二维数组
 
     public ChessColor getCurrentColor() {
         return currentColor;
@@ -125,14 +120,62 @@ public class Chessboard extends JComponent {
     public void swapChessComponents(SquareComponent chess1, SquareComponent chess2) {
         // Note that chess1 has higher priority, 'destroys' chess2 if exists.
         if (!(chess2 instanceof EmptySlotComponent)) {
-            if (chess2.getChessColor() == ChessColor.BLACK) {
+            if (chess2.getChessColor() == ChessColor.BLACK) {//吃黑色的chess2
                 Red_score += AddHowMuchScore(chess2);
             }
-            if (chess2.getChessColor() == ChessColor.RED) {
+            if (chess2.getChessColor() == ChessColor.RED) {//吃红色的chess2
                 Black_score += AddHowMuchScore(chess2);
             }
             ChessBeEaten = chess2;
             remove(chess2);
+            if(ChessBeEaten.getChessColor() == ChessColor.RED) {
+                if (ChessBeEaten.getRank() == 1) {
+                    Menu.chessGameFrame.countRS++ ;
+                    Menu.chessGameFrame.RSoldier.setText(String.valueOf(Menu.chessGameFrame.countRS));
+                } else if (ChessBeEaten.getRank() == 2) {
+                    Menu.chessGameFrame.countRPao++ ;
+                    Menu.chessGameFrame.RCannon.setText(String.valueOf(Menu.chessGameFrame.countRPao));
+                } else if (ChessBeEaten.getRank() == 3) {
+                    Menu.chessGameFrame.countRChe++ ;
+                    Menu.chessGameFrame.RChariot.setText(String.valueOf(Menu.chessGameFrame.countRChe));
+                } else if (ChessBeEaten.getRank() == 4) {
+                    Menu.chessGameFrame.countRH++ ;
+                    Menu.chessGameFrame.RHorse.setText(String.valueOf(Menu.chessGameFrame.countRH));
+                } else if (ChessBeEaten.getRank() == 5) {
+                    Menu.chessGameFrame.countRM++ ;
+                    Menu.chessGameFrame.RMinister.setText(String.valueOf(Menu.chessGameFrame.countRM));
+                } else if (ChessBeEaten.getRank() == 6) {
+                    Menu.chessGameFrame.countRA++ ;
+                    Menu.chessGameFrame.RAdvisor.setText(String.valueOf(Menu.chessGameFrame.countRA));
+                } else {
+                    Menu.chessGameFrame.RGeneral.setText("1");
+                }
+            }
+            if(ChessBeEaten.getChessColor() == ChessColor.BLACK) {
+                if (ChessBeEaten.getRank() == 1) {
+                    Menu.chessGameFrame.countBS++ ;
+                    Menu.chessGameFrame.BSoldier.setText(String.valueOf(Menu.chessGameFrame.countBS));
+                } else if (ChessBeEaten.getRank() == 2) {
+                    Menu.chessGameFrame.countBPao++ ;
+                    Menu.chessGameFrame.BCannon.setText(String.valueOf(Menu.chessGameFrame.countBPao));
+                } else if (ChessBeEaten.getRank() == 3) {
+                    Menu.chessGameFrame.countBChe++ ;
+                    Menu.chessGameFrame.BChariot.setText(String.valueOf(Menu.chessGameFrame.countBChe));
+                } else if (ChessBeEaten.getRank() == 4) {
+                    Menu.chessGameFrame.countBH++ ;
+                    Menu.chessGameFrame.BHorse.setText(String.valueOf(Menu.chessGameFrame.countBH));
+                } else if (ChessBeEaten.getRank() == 5) {
+                    Menu.chessGameFrame.countBM++ ;
+                    Menu.chessGameFrame.BMinister.setText(String.valueOf(Menu.chessGameFrame.countBM));
+                } else if (ChessBeEaten.getRank() == 6) {
+                    Menu.chessGameFrame.countBA++ ;
+                    Menu.chessGameFrame.BAdvisor.setText(String.valueOf(Menu.chessGameFrame.countBA));
+                } else {
+                    Menu.chessGameFrame.BGeneral.setText("1");
+                }
+            }
+
+
             add(chess2 = new EmptySlotComponent(chess2.getChessboardPoint(), chess2.getLocation(), clickController, CHESS_SIZE));
         }
         chess1.swapLocation(chess2);
@@ -148,11 +191,15 @@ public class Chessboard extends JComponent {
         String s2 = String.valueOf(getBlack_score());
         Menu.chessGameFrame.redCredit.setText(s1);
         Menu.chessGameFrame.blackCredit.setText(s2);
+<<<<<<< HEAD
         try {
             saveGame();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+=======
+        Menu.chessGameFrame.judgeWinner();
+>>>>>>> a4179ee32ff49a421b47fc29e9e181349ccce875
     }
 
     //增加一个方法，先弄出一个list，再按list中的数字给棋子初始化
@@ -161,8 +208,8 @@ public class Chessboard extends JComponent {
         for (int i = 0; i < 32; i++) {
             ChushihuaQiZi2.add(i);
         }
-        Collections.shuffle(ChushihuaQiZi2);
-        List<String> ChushihuaQiZi = new ArrayList<>();
+        Collections.shuffle(ChushihuaQiZi2);//默认随机重排
+        List<String> ChushihuaQiZi = new ArrayList<>();//此处根据重排后的序号进行布棋
         for (int i = 0; i < 32; i++) {
             if (ChushihuaQiZi2.get(i) < 5) {
                 ChushihuaQiZi.add("R1");
@@ -206,7 +253,7 @@ public class Chessboard extends JComponent {
                 if (ChushihuaQiZi.get(4 * i + j).charAt(0) == 'R') {
                     color = ChessColor.RED;
                 } else color = ChessColor.BLACK;
-                if (ChushihuaQiZi.get(4 * i + j).charAt(1) == '1') {
+                if (ChushihuaQiZi.get(4 * i + j).charAt(1) == '1') {//第i行，第j个
                     squareComponent = new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), color, clickController, CHESS_SIZE);
                 } else if (ChushihuaQiZi.get(4 * i + j).charAt(1) == '2') {
                     squareComponent = new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), color, clickController, CHESS_SIZE);
@@ -232,6 +279,45 @@ public class Chessboard extends JComponent {
             throw new RuntimeException(e);
         }
     }
+    /**
+     * 写cheating mode
+     */
+    public List<String> ReverseRecord(){
+        List<String> NotReverse = new ArrayList<>();
+        for(int i = 0; i < squareComponents.length; i++){
+            for(int j = 0; j < squareComponents[i].length; j++){
+                if(squareComponents[i][j].isReversal() == false){
+                    String s1 = String.format("%d %d",i,j);
+                    NotReverse.add(s1);
+                }
+            }
+        }
+        return NotReverse;
+    }
+
+    public void CheatReverse(){
+        for(int i = 0; i < squareComponents.length; i++){
+            for(int j = 0; j < squareComponents[i].length; j++){
+                if (squareComponents[i][j].isReversal() == false){
+                    squareComponents[i][j].setReversal(true);
+                }
+            }
+        }
+    }
+    public void ReverseAgain(List<String> arr1){
+        for(int a = 0; a < arr1.size(); a++){
+            String[] arr2 = arr1.get(a).split("\\s");
+            int x = Integer.parseInt(arr2[0]);
+            int y = Integer.parseInt(arr2[1]);
+            for(int i = 0; i < squareComponents.length; i++){
+                for(int j = 0; j < squareComponents[i].length; j++){
+                    if(i == x && j == y)
+                        squareComponents[i][j].setReversal(false);
+                    }
+                }
+            }
+        }
+
 
     /**
      * 绘制棋盘格子
