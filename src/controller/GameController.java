@@ -26,7 +26,17 @@ public class GameController {
         try {
             List<String> chessData = Files.readAllLines(Path.of(path));
             //todo:error check
-            JOptionPane.showMessageDialog(chessboard,"error 101");
+            if (!path.endsWith("txt")){
+                JOptionPane.showMessageDialog(chessboard,"error 101");
+            }
+            if (chessData.size()!=8){
+                JOptionPane.showMessageDialog(chessboard,"error 102");
+            }else for (int i = 0; i < 7; i++) {
+                if (chessData.get(i).length()!=11){
+                    JOptionPane.showMessageDialog(chessboard,"error 102");
+                }
+            }
+
             chessboard.loadGame2(chessData);
             return chessData;
         } catch (IOException e) {

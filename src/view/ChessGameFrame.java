@@ -20,8 +20,8 @@ public class ChessGameFrame extends JFrame implements ActionListener {
 
     private JButton Cheat;
 
-    public JTextField redCredit = new JTextField("0",2);
-    public JTextField blackCredit = new JTextField("0",2);
+    public JTextField redCredit = new JTextField("0", 2);
+    public JTextField blackCredit = new JTextField("0", 2);
     private GameController gameController;
     private static JLabel beginLabel;
 
@@ -48,6 +48,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addBlackCredit();
         addRedKilled();
         addBlackKilled();
+        addWhoWinLabel();
 
         //增加背景图片（最后）
         ImageIcon bg = new ImageIcon("imgs/GamePicture.png");
@@ -57,6 +58,10 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         label.setBounds(0, 0, bg.getIconWidth(), bg.getIconHeight());
         add(label);
         this.setVisible(true);
+    }
+
+    public void addWhoWinLabel() {
+
     }
 
 
@@ -91,8 +96,8 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     private void addRestartButton() {
         JButton button = new JButton("Restart");
         button.addActionListener((e) -> {
-            int value=JOptionPane.showConfirmDialog(null, "你确定要重新开始吗？", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (value==JOptionPane.YES_OPTION) {
+            int value = JOptionPane.showConfirmDialog(null, "你确定要重新开始吗？", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (value == JOptionPane.YES_OPTION) {
                 gameController.restartGame();
             }
         });
@@ -102,6 +107,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         add(button);
         setVisible(true);
     }
+
     /**
      * 按下按钮输入读档路径
      */
@@ -120,6 +126,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             gameController.loadGameFromFile(path);
         });
     }
+
     private void addCheatingBottom() {
         Cheat = new JButton("Cheat");
         Cheat.setLocation(WIDTH * 3 / 5 + 50, HEIGHT / 10 + 200);
@@ -128,17 +135,19 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         Cheat.setBackground(Color.blue);//为什么没颜色？
         add(Cheat);
         Cheat.addActionListener(this);
-        setVisible(true);}
-        public void actionPerformed (ActionEvent e){//跳转界面
+        setVisible(true);
+    }
 
-            if (e.getSource() == Cheat) {
-                JFrame cheatingFrame = new JFrame("Cheating Frame");
-                cheatingFrame.setLayout(null);
-                cheatingFrame.setSize(540,540);
-                cheatingFrame.setVisible(true);
-            }
+    public void actionPerformed(ActionEvent e) {//跳转界面
 
+        if (e.getSource() == Cheat) {
+            JFrame cheatingFrame = new JFrame("Cheating Frame");
+            cheatingFrame.setLayout(null);
+            cheatingFrame.setSize(540, 540);
+            cheatingFrame.setVisible(true);
         }
+
+    }
 
 
     private void addRedName() {
@@ -146,30 +155,32 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         chess.setForeground(Color.RED);
         chess.setSize(100, 100);
         chess.setFont(new Font("Rockwell", Font.BOLD, 20));
-        chess.setLocation(WIDTH * 5 / 8, HEIGHT * 1/2);
-        add(chess);
-        setVisible(true);
-    }
-    private void addBlackName() {
-        JLabel chess = new JLabel("Black");
-        chess.setSize(100, 100);
-        chess.setFont(new Font("Rockwell", Font.BOLD, 20));
-        chess.setLocation(WIDTH * 8 / 9, HEIGHT * 1/2);
+        chess.setLocation(WIDTH * 5 / 8, HEIGHT * 1 / 2);
         add(chess);
         setVisible(true);
     }
 
-    private void addRedCredit(){
+    private void addBlackName() {
+        JLabel chess = new JLabel("Black");
+        chess.setSize(100, 100);
+        chess.setFont(new Font("Rockwell", Font.BOLD, 20));
+        chess.setLocation(WIDTH * 8 / 9, HEIGHT * 1 / 2);
+        add(chess);
+        setVisible(true);
+    }
+
+    private void addRedCredit() {
         redCredit.setFont(new Font("Rockwell", Font.BOLD, 25));
         redCredit.setLocation(WIDTH * 5 / 8, 350);
-        redCredit.setSize(45,40);
+        redCredit.setSize(45, 40);
         add(redCredit);
         setVisible(true);
     }
-    private void addBlackCredit(){
+
+    private void addBlackCredit() {
         blackCredit.setFont(new Font("Rockwell", Font.BOLD, 25));
         blackCredit.setLocation(WIDTH * 8 / 9, 350);
-        blackCredit.setSize(45,40);
+        blackCredit.setSize(45, 40);
         add(blackCredit);
         setVisible(true);
     }
