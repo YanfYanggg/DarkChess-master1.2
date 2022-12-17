@@ -173,6 +173,11 @@ public class Chessboard extends JComponent implements Cloneable{
                 } else {
                     Menu.chessGameFrame.BGeneral.setText("1");
                 }
+                try {
+                    saveGame();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
 
@@ -265,6 +270,11 @@ public class Chessboard extends JComponent implements Cloneable{
             }
         }
         repaint();
+        try {
+            saveGame();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     /**
      * 写cheating mode
