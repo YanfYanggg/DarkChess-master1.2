@@ -488,6 +488,8 @@ public class Chessboard extends JComponent implements Cloneable {
                     bw.write("g1 ");
                 } else if (squareComponents[i][j].getName1() == 27 && !squareComponents[i][j].isReversal()) {
                     bw.write("g0 ");
+                }else if (squareComponents[i][j].getName1() == 0){
+                    bw.write("em ");
                 }
 
 
@@ -615,6 +617,15 @@ public class Chessboard extends JComponent implements Cloneable {
             }
         }
         initialGameByCharacters2(chesses);
+         clickController.setProgress(Integer.parseInt(chessData.get(9)));
+        if (chessData.get(9).equals("Red is the next")){
+            currentColor=ChessColor.RED;
+        }
+        else if (chessData.get(9).equals("Black is the next")){
+            currentColor=ChessColor.BLACK;
+        }
+        setRed_score(Integer.parseInt(chessData.get(10)));
+        setBlack_score(Integer.parseInt(chessData.get(11)));
     }
 
     public void initialGameByCharacters2(String[][] chesses) {
