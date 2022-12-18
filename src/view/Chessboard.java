@@ -617,7 +617,7 @@ public class Chessboard extends JComponent implements Cloneable {
             }
         }
         initialGameByCharacters2(chesses);
-         clickController.setProgress(Integer.parseInt(chessData.get(9)));
+         clickController.setProgress(Integer.parseInt(chessData.get(8)));
         if (chessData.get(9).equals("Red is the next")){
             currentColor=ChessColor.RED;
         }
