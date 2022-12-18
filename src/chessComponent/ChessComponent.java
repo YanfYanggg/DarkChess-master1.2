@@ -19,7 +19,7 @@ public class ChessComponent extends SquareComponent {
         super(chessboardPoint, location, chessColor, clickController, size);
     }
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {//g:棋子相关的图
         super.paintComponent(g);
         //绘制棋子填充色
         g.setColor(Color.ORANGE);
@@ -40,5 +40,13 @@ public class ChessComponent extends SquareComponent {
                 g2.drawOval(spacingLength, spacingLength, getWidth() - 2 * spacingLength, getHeight() - 2 * spacingLength);
             }
         }
+        //绘制预测步伐中可能可以走的棋子/位置（还要把空位给加上！！！）
+        if (isProbable){
+            g.setColor(Color.GREEN);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(new BasicStroke(4f));
+            g2.drawOval(spacingLength, spacingLength, getWidth() - 2 * spacingLength, getHeight() - 2 * spacingLength);
+        }
+
     }
 }

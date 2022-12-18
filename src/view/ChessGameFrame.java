@@ -74,6 +74,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addChessboard();
         addLabel();
         addRestartButton();
+        addExitButton();
         addLoadButton();
         addCheatingBottom();
         addRedName();
@@ -128,11 +129,26 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         button.addActionListener((e) -> {
             int value=JOptionPane.showConfirmDialog(null, "你确定要重新开始吗？", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (value==JOptionPane.YES_OPTION) {
+                this.dispose();
                 gameController.restartGame();
             }
         });
         button.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 60);
-        button.setSize(180, 60);
+        button.setSize(100, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+        setVisible(true);
+    }
+    private void addExitButton(){
+        JButton button = new JButton("Exit");
+        button.addActionListener((e) -> {
+            int value=JOptionPane.showConfirmDialog(null, "     你确定要退出吗？\n本次游戏数据将不会保存", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (value==JOptionPane.YES_OPTION) {
+                this.dispose();
+            }
+        });
+        button.setLocation(WIDTH * 3 / 5 + 100, HEIGHT / 10 + 60);
+        button.setSize(80, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         setVisible(true);
@@ -410,8 +426,6 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             }
             if (n == JOptionPane.NO_OPTION) {
                 this.dispose();
-                Menu menu = new Menu(720, 720);
-                menu.setVisible(true);
             }
         }
     }

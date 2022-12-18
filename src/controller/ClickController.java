@@ -19,19 +19,20 @@ public class ClickController {
 
     public void onClick(SquareComponent squareComponent) {
         //判断第一次点击
-        if (first == null) {
+        if (first == null) {//初次点击
             if (handleFirst(squareComponent)) {
-                squareComponent.setSelected(true);
+                squareComponent.setSelected(true);//标红状态
                 first = squareComponent;
                 first.repaint();
+                //first.judgeProbable();
             }
-        } else {
-            if (first == squareComponent) { // 再次点击取消选取
+        } else {//点到有棋子的
+            if (first == squareComponent) { // 再次点击自己，取消选取
                 squareComponent.setSelected(false);
                 SquareComponent recordFirst = first;
                 first = null;
                 recordFirst.repaint();
-            } else if (handleSecond(squareComponent)) {
+            } else if (handleSecond(squareComponent)) {//点到别的
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, squareComponent);
                 chessboard.clickController.swapPlayer();
@@ -49,13 +50,14 @@ public class ClickController {
      */
 
     private int a=0;//加一个a,用于判断第一个是什么方
-    private boolean handleFirst(SquareComponent squareComponent) {
+    private boolean handleFirst(SquareComponent squareComponent) {//第一次点选，翻转棋子
+        //未翻转且不是不空位进入if
         if (!squareComponent.isReversal() && !(squareComponent instanceof EmptySlotComponent)) {
             if (a==0){
                 chessboard.setCurrentColor(squareComponent.getChessColor());
                 a=1;
             }
-            squareComponent.setReversal(true);
+            squareComponent.setReversal(true);//翻转
             System.out.printf("onClick to reverse a chess [%d,%d]\n", squareComponent.getChessboardPoint().getX(), squareComponent.getChessboardPoint().getY());
             squareComponent.repaint();
             chessboard.clickController.swapPlayer();
@@ -69,11 +71,11 @@ public class ClickController {
      * @return first棋子是否能够移动到second棋子位置
      */
 
-    private boolean handleSecond(SquareComponent squareComponent) {
+    private boolean handleSecond(SquareComponent squareComponent) {//选定一个棋后，第二次点选
 
         //没翻开或空棋子，进入if
         if (!squareComponent.isReversal()) {
-            if (first.getRank()==2){
+            if (first.getRank()==2){//点击是炮：可以打
                 return first.canMoveTo(chessboard.getChessComponents(), squareComponent.getChessboardPoint())&&!(squareComponent instanceof EmptySlotComponent);
             }
             //对于不是炮的，第二次点击的地方是没翻开且非空棋子不能走
@@ -102,7 +104,7 @@ public class ClickController {
     }
 
 
-    public void swapPlayer() {
+    public void swapPlayer() {//交换行棋方
         chessboard.setCurrentColor(chessboard.getCurrentColor() == ChessColor.BLACK ? ChessColor.RED : ChessColor.BLACK);
         ChessGameFrame.getBeginLabel().setText(String.format("%s's TURN", chessboard.getCurrentColor().getName()));
         if (ShiFouYiHuiHe){
