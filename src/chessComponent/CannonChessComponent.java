@@ -13,8 +13,10 @@ public class CannonChessComponent extends ChessComponent {
         super(chessboardPoint, location, chessColor, clickController, size);
         if (this.getChessColor() == ChessColor.RED) {
             name = new ImageIcon("imgs/红炮.png").getImage();
+            name1=12;
         } else {
             name = new ImageIcon("imgs/黑炮.png").getImage();
+            name1=22;
         }
         rank=2;
     }

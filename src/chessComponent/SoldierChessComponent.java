@@ -13,8 +13,10 @@ public class SoldierChessComponent extends ChessComponent {
         super(chessboardPoint, location, chessColor, clickController, size);
         if (this.getChessColor() == ChessColor.RED) {
             name = new ImageIcon("imgs/红兵.png").getImage();
+            name1=11;
         } else {
             name = new ImageIcon("imgs/黒卒.png").getImage();
+            name1=21;
         }
         rank=1;
     }

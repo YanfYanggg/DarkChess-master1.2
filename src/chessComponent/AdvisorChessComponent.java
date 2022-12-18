@@ -13,8 +13,10 @@ public class AdvisorChessComponent extends ChessComponent {
         super(chessboardPoint, location, chessColor, clickController, size);
         if (this.getChessColor() == ChessColor.RED) {
             name = new ImageIcon("imgs/红士.png").getImage();
+            name1=16;
         } else {
             name = new ImageIcon("imgs/黑士.png").getImage();
+            name1=26;
         }
         rank=6;
     }

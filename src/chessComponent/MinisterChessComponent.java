@@ -13,8 +13,10 @@ public class MinisterChessComponent extends ChessComponent {
         super(chessboardPoint, location, chessColor, clickController, size);
         if (this.getChessColor() == ChessColor.RED) {
             name = new ImageIcon("imgs/红相.png").getImage();
+            name1=15;
         } else {
             name = new ImageIcon("imgs/黑象.png").getImage();
+            name1=25;
         }
         rank=5;
     }

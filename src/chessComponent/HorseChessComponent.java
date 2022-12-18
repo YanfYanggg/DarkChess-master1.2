@@ -13,8 +13,10 @@ public class HorseChessComponent extends ChessComponent {
         super(chessboardPoint, location, chessColor, clickController, size);
         if (this.getChessColor() == ChessColor.RED) {
             name = new ImageIcon("imgs/红马.png").getImage();
+            name1=14;
         } else {
             name = new ImageIcon("imgs/黑马.png").getImage();
+            name1=24;
         }
         rank=4;
     }

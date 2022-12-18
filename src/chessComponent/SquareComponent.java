@@ -42,6 +42,11 @@ public abstract class SquareComponent extends JComponent implements Cloneable{
     protected boolean isReversal;
     private boolean selected;
     protected int rank;
+    protected int name1;
+
+    public int getName1() {
+        return name1;
+    }
 
     public int getRank() {
         return rank;

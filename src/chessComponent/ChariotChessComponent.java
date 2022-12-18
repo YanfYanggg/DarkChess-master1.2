@@ -16,8 +16,10 @@ public class ChariotChessComponent extends ChessComponent {
         super(chessboardPoint, location, chessColor, clickController, size);
         if (this.getChessColor() == ChessColor.RED) {
             name = new ImageIcon("imgs/红车.png").getImage();
+            name1=13;
         } else {
             name = new ImageIcon("imgs/黑车.png").getImage();
+            name1=23;
         }
         rank=3;
     }

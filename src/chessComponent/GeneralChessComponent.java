@@ -13,8 +13,10 @@ public class GeneralChessComponent extends ChessComponent {
         super(chessboardPoint, location, chessColor, clickController, size);
         if (this.getChessColor() == ChessColor.RED) {
             name = new ImageIcon("imgs/红帅.png").getImage();
+            name1=17;
         } else {
             name = new ImageIcon("imgs/黑将.png").getImage();
+            name1=27;
         }
         rank=7;
     }
