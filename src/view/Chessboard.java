@@ -578,13 +578,19 @@ public class Chessboard extends JComponent implements Cloneable {
             }
             bw.newLine();
         }
-        bw.write(clickController.getProgress());
+
+        bw.write(String.format("%s",clickController.getProgress()));
         bw.newLine();
-        bw.write(currentColor.ordinal());
+        if (currentColor==ChessColor.RED){
+            bw.write("Red is the next");
+        }
+        else if (currentColor==ChessColor.BLACK){
+            bw.write("Black is the next");
+        }
         bw.newLine();
-        bw.write(getRed_score());
+        bw.write(String.format("%s",getRed_score()));
         bw.newLine();
-        bw.write(getBlack_score());
+        bw.write(String.format("%s",getBlack_score()));
         bw.flush();
     }
 
