@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 c0 e0 A0 g0 
 F0 F1 C1 a0 
 B0 a1 a1 b0 
@@ -7,6 +8,17 @@ D0 A0 C0 c0
 a0 A0 E0 f0 
 G0 d0 f0 a0 
 3
+=======
+A0 a0 G0 A0 
+f0 B1 b1 E1 
+e0 A1 em d1 
+g0 D1 E1 F1 
+a0 a0 A0 C1 
+F0 b0 A0 a0 
+D0 c0 e0 a0 
+f0 C0 d0 c0 
+7
+>>>>>>> e70f14ce580578e0066e4310ddb73b4b321b4ca5
 Red is the next
 0
-0
+5

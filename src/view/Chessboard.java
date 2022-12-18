@@ -625,7 +625,9 @@ public class Chessboard extends JComponent implements Cloneable {
             currentColor=ChessColor.BLACK;
         }
         setRed_score(Integer.parseInt(chessData.get(10)));
+        Menu.chessGameFrame.redCredit.setText(chessData.get(10));
         setBlack_score(Integer.parseInt(chessData.get(11)));
+        Menu.chessGameFrame.blackCredit.setText(chessData.get(11));
     }
 
     public void initialGameByCharacters2(String[][] chesses) {
