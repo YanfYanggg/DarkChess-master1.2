@@ -75,8 +75,6 @@ public class Menu extends JFrame implements ActionListener {
 
         if (e.getSource() == Game_Start) {
 
-            this.dispose();
-
             ChessGameFrame mainFrame = new ChessGameFrame(720, 720);
             chessGameFrame = mainFrame;
 

@@ -3,6 +3,7 @@ package chessComponent;
 import controller.ClickController;
 import model.ChessColor;
 import model.ChessboardPoint;
+import view.Chessboard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,17 +17,7 @@ import java.awt.event.MouseEvent;
  * 1. EmptySlotComponent: 空棋子
  * 2. ChessComponent: 表示非空棋子
  */
-public abstract class SquareComponent extends JComponent implements Cloneable{
-    public Object clone(){
-        Object obj = null;
-        try {
-            obj = super.clone();
-        } catch (CloneNotSupportedException e){
-            e.printStackTrace();
-        }
-        return obj;
-    }
-
+public abstract class SquareComponent extends JComponent{
     private static final Color squareColor = new Color(250, 220, 190);
     protected static int spacingLength;
     protected static final Font CHESS_FONT = new Font("宋体", Font.BOLD, 36);
@@ -36,11 +27,13 @@ public abstract class SquareComponent extends JComponent implements Cloneable{
      * chessColor: 表示这个棋子的颜色，有红色，黑色，无色三种
      * isReversal: 表示是否翻转
      * selected: 表示这个棋子是否被选中
+     * isProbable: 表示选中（isSelected）的棋子可能去走这一步
      */
     private ChessboardPoint chessboardPoint;
     protected final ChessColor chessColor;//枚举类的使用
     protected boolean isReversal;
     private boolean selected;
+    public boolean isProbable;
     protected int rank;
     protected int name1;
 
@@ -67,14 +60,23 @@ public abstract class SquareComponent extends JComponent implements Cloneable{
         this.selected = false;
         this.clickController = clickController;
         this.isReversal = false;
+        this.isProbable = false;
     }
 
     public boolean isReversal() {
         return isReversal;
     }
 
+
     public void setReversal(boolean reversal) {
         isReversal = reversal;
+    }
+    public boolean isProbable() {
+        return isProbable;
+    }
+
+    public void setProbable(boolean probable) {
+        isProbable = probable;
     }
 
     public static void setSpacingLength(int spacingLength) {
@@ -140,7 +142,7 @@ public abstract class SquareComponent extends JComponent implements Cloneable{
     public boolean canMoveTo(SquareComponent[][] chessboard, ChessboardPoint destination) {
         SquareComponent destinationChess = chessboard[destination.getX()][destination.getY()];
 
-        boolean HongHei;
+        boolean HongHei;//是否为对方棋子
         if (!destinationChess.getChessColor().equals(this.getChessColor())) {
             HongHei = true;
         } else HongHei = false;
@@ -148,7 +150,7 @@ public abstract class SquareComponent extends JComponent implements Cloneable{
         //如果不是炮
         if (this.rank != 2) {
             if ((Math.abs(this.chessboardPoint.getX() - destination.getX()) == 1 && this.chessboardPoint.getY() - destination.getY() == 0) || (Math.abs(this.chessboardPoint.getY() - destination.getY()) == 1 && this.chessboardPoint.getX() - destination.getX() == 0)) {
-                boolean BingChiJiang;
+                boolean BingChiJiang;//兵吃将
                 if (this.rank == 1 && destinationChess.rank == 7) {
                     BingChiJiang = true;
                 } else BingChiJiang = false;
@@ -221,4 +223,24 @@ public abstract class SquareComponent extends JComponent implements Cloneable{
         g.setColor(squareColor);
         g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
     }
+
+    /**
+     * 为了在判断isprobable时用point找棋子加的方法
+     * @param chessboard
+     * @param chessboardPoint
+     * @return
+     */
+    public SquareComponent searchChess(SquareComponent[][] chessboard,ChessboardPoint chessboardPoint){
+        SquareComponent target = null;
+        for(int i = 0; i < chessboard.length; i++){
+            for(int j = 0; j < chessboard[i].length; j++){
+                if(i == chessboardPoint.getX() && j == chessboardPoint.getY())
+                    target = chessboard[i][j];
+            }
+        }
+        return target;
+    }
+
+
+
 }

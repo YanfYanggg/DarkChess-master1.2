@@ -117,6 +117,11 @@ public class Chessboard extends JComponent implements Cloneable {
         return ChessBeEaten;
     }
 
+    /**
+     * 交换2棋子位置
+     * @param chess1
+     * @param chess2
+     */
     public void swapChessComponents(SquareComponent chess1, SquareComponent chess2) {
         // Note that chess1 has higher priority, 'destroys' chess2 if exists.
         if (!(chess2 instanceof EmptySlotComponent)) {
