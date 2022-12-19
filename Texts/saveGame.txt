@@ -1,12 +1,12 @@
-d0 g0 A0 F0 
-B1 d1 B1 f0 
-A1 e1 a1 C1 
-F1 E1 em a1 
-G1 A1 e1 a1 
-a0 em D1 A1 
-E0 a0 c0 b0 
-A0 c0 f0 C0 
-11
+B0 f0 E0 B0 
+a0 F0 c0 g0 
+E0 A0 F0 c0 
+a0 a0 A0 e0 
+D0 D0 e0 b0 
+a0 C0 G0 d0 
+A0 A0 C0 A0 
+d0 a0 b0 f0 
+1
 Black is the next
-5
-5
+0
+0
