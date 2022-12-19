@@ -27,7 +27,7 @@ public class GameController {
         try {
             List<String> chessData = Files.readAllLines(Path.of(path));
             //todo:error check
-            if (!path.endsWith("txt")){
+            if (!path.endsWith(".txt")){
                 JOptionPane.showMessageDialog(chessboard,"error 101");
             }
             if (chessData.size()!=12){
