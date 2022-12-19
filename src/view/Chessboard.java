@@ -1,6 +1,7 @@
 package view;
 
 
+import Musics.Test;
 import chessComponent.*;
 import controller.GameController;
 import model.*;
@@ -192,6 +193,11 @@ public class Chessboard extends JComponent implements Cloneable {
         //只重新绘制chess1 chess2，其他不变
         chess1.repaint();
         chess2.repaint();
+        String path = "Music/吃棋子.wav";
+        Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
+        clickMusic.run = true;
+        clickMusic.start();
+
         String s1 = String.valueOf(getRed_score());
         String s2 = String.valueOf(getBlack_score());
         Menu.chessGameFrame.redCredit.setText(s1);
@@ -618,7 +624,10 @@ public class Chessboard extends JComponent implements Cloneable {
         }
         initialGameByCharacters2(chesses);
          clickController.setProgress(Integer.parseInt(chessData.get(8)));
+<<<<<<< HEAD
         Menu.chessGameFrame.ProgressS.setText(chessData.get(8));
+=======
+>>>>>>> lyx
         if (chessData.get(9).equals("Red is the next")){
             currentColor=ChessColor.RED;
         }
