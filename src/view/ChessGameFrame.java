@@ -446,7 +446,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
      * 写胜利者判断
      */
     public void judgeWinner(){
-        if(chessboard1.getRed_score() >= 5){
+        if(chessboard1.getRed_score() >= 60){
             String path = "Music/掉钱.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
             clickMusic.run = true;
@@ -467,7 +467,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
                 menu.blackCoinsKuang.setText(s2);
             }
         }
-        if(chessboard1.getBlack_score() >= 5){
+        if(chessboard1.getBlack_score() >= 60){
             String path = "Music/掉钱.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
             clickMusic.run = true;
