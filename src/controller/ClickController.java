@@ -1,6 +1,7 @@
 package controller;
 
 
+import Musics.Test;
 import chessComponent.SquareComponent;
 import chessComponent.EmptySlotComponent;
 import model.ChessColor;
@@ -20,13 +21,18 @@ public class ClickController {
     public void onClick(SquareComponent squareComponent) {
         //判断第一次点击
         if (first == null) {//初次点击
+            String path = "Music/棋子按键音.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
+            clickMusic.run = true;
+            clickMusic.start();
             if (handleFirst(squareComponent)) {
                 squareComponent.setSelected(true);//标红状态
                 first = squareComponent;
                 first.repaint();
                 //first.judgeProbable();
             }
-        } else {//点到有棋子的
+        }
+        else {//点到有棋子的
             if (first == squareComponent) { // 再次点击自己，取消选取
                 squareComponent.setSelected(false);
                 SquareComponent recordFirst = first;
@@ -36,7 +42,6 @@ public class ClickController {
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, squareComponent);
                 chessboard.clickController.swapPlayer();
-
                 first.setSelected(false);
                 first = null;
             }

@@ -1,5 +1,6 @@
 package view;
 
+import Musics.Test;
 import controller.GameController;
 
 import javax.swing.*;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
  * 3 JButton： 按钮
  */
 public class ChessGameFrame extends JFrame implements ActionListener {
+    public int RedCoins = 0;
+    public int BlackCoins = 0;
     public JLabel BackLabel;
     public Chessboard chessboard1;
     public JFrame CheatingFrame;
@@ -80,7 +83,9 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addRedName();
         addBlackName();
         addRedCredit();
+        redCredit.setEditable(false);
         addBlackCredit();
+        blackCredit.setEditable(false);
         addRedKilled();
         addBlackKilled();
         judgeWinner();
@@ -127,6 +132,10 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     private void addRestartButton() {
         JButton button = new JButton("Restart");
         button.addActionListener((e) -> {
+            String path = "Music/大按钮的副本.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
+            clickMusic.run = true;
+            clickMusic.start();
             int value=JOptionPane.showConfirmDialog(null, "你确定要重新开始吗？", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (value==JOptionPane.YES_OPTION) {
                 this.dispose();
@@ -142,6 +151,10 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     private void addExitButton(){
         JButton button = new JButton("Exit");
         button.addActionListener((e) -> {
+            String path = "Music/大按钮的副本.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
+            clickMusic.run = true;
+            clickMusic.start();
             int value=JOptionPane.showConfirmDialog(null, "     你确定要退出吗？\n本次游戏数据将不会保存", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (value==JOptionPane.YES_OPTION) {
                 this.dispose();
@@ -166,6 +179,10 @@ public class ChessGameFrame extends JFrame implements ActionListener {
 
         //点击buttom触发的事件（只是介绍 没有改方法）
         button.addActionListener(e -> {
+            String path1 = "Music/大按钮的副本.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path1);
+            clickMusic.run = true;
+            clickMusic.start();
             System.out.println("Click load");
             String path = JOptionPane.showInputDialog(this, "Input Path here");
             gameController.loadGameFromFile(path);
@@ -193,6 +210,10 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     }
     public void actionPerformed (ActionEvent e){//不要点2次cheat！!
         if (e.getSource() == Cheat) {
+            String path = "Music/大按钮的副本.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
+            clickMusic.run = true;
+            clickMusic.start();
             CheatingFrame = new JFrame("Cheating Frame");
             JLabel label = new JLabel(" 看完记得赶紧close～不要被对手发现啦！");
             label.setFont(new Font("Rockwell", Font.BOLD, 15));
@@ -207,6 +228,10 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             setVisible(true);
         }
         if(e.getSource() == close){
+            String path = "Music/大按钮的副本.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
+            clickMusic.run = true;
+            clickMusic.start();
             CheatingFrame.remove(chessboard1);
             repaint();
             CheatingFrame.dispose();
@@ -296,12 +321,19 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         Soldier.setSize(100,100);
         add(Soldier);
         RGeneral.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RGeneral.setEditable(false);
         RAdvisor.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RAdvisor.setEditable(false);
         RMinister.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RMinister.setEditable(false);
         RChariot.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RChariot.setEditable(false);
         RHorse.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RHorse.setEditable(false);
         RSoldier.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RSoldier.setEditable(false);
         RCannon.setFont(new Font("Rockwell", Font.BOLD, 18));
+        RCannon.setEditable(false);
         RGeneral.setLocation(WIDTH * 5 / 8, 600);
         RAdvisor.setLocation(WIDTH * 5 / 8, 570);
         RMinister.setLocation(WIDTH * 5 / 8, 540);
@@ -372,12 +404,19 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         add(Soldier);
 
         BGeneral.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BGeneral.setEditable(false);
         BAdvisor.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BAdvisor.setEditable(false);
         BMinister.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BMinister.setEditable(false);
         BChariot.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BChariot.setEditable(false);
         BHorse.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BHorse.setEditable(false);
         BSoldier.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BSoldier.setEditable(false);
         BCannon.setFont(new Font("Rockwell", Font.BOLD, 18));
+        BCannon.setEditable(false);
         BGeneral.setLocation(WIDTH * 8 / 9, 600);
         BAdvisor.setLocation(WIDTH * 8 / 9, 570);
         BMinister.setLocation(WIDTH * 8 / 9, 540);
@@ -407,25 +446,45 @@ public class ChessGameFrame extends JFrame implements ActionListener {
      * 写胜利者判断
      */
     public void judgeWinner(){
-        if(chessboard1.getRed_score() >= 60){
+        if(chessboard1.getRed_score() >= 5){
+            String path = "Music/掉钱.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
+            clickMusic.run = true;
+            clickMusic.start();
+            RedCoins += 10;
             int n = JOptionPane.showConfirmDialog(null, "红方胜利！是否开始新游戏？", "游戏结束", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (n == JOptionPane.YES_OPTION) {
+                this.dispose();
                 gameController.restartGame();
                 addLabel();
             }
             if (n == JOptionPane.NO_OPTION) {
                 this.dispose();
-                Menu menu = new Menu(720, 720);
-                menu.setVisible(true);
+                Menu menu = new Menu(720,720);
+                String s1 = String.valueOf(RedCoins);
+                String s2 = String.valueOf(BlackCoins);
+                menu.redCoinsKuang.setText(s1);
+                menu.blackCoinsKuang.setText(s2);
             }
         }
-        if(chessboard1.getBlack_score() >= 60){
+        if(chessboard1.getBlack_score() >= 5){
+            String path = "Music/掉钱.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
+            clickMusic.run = true;
+            clickMusic.start();
+            BlackCoins += 10;
             int n = JOptionPane.showConfirmDialog(null, "黑方胜利！是否开始新游戏？", "游戏结束", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (n == JOptionPane.YES_OPTION) {
+                this.dispose();
                 gameController.restartGame();
             }
             if (n == JOptionPane.NO_OPTION) {
                 this.dispose();
+                Menu menu = new Menu(720,720);
+                String s1 = String.valueOf(RedCoins);
+                String s2 = String.valueOf(BlackCoins);
+                menu.redCoinsKuang.setText(s1);
+                menu.blackCoinsKuang.setText(s2);
             }
         }
     }
