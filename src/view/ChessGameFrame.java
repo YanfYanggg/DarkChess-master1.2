@@ -29,6 +29,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     private JButton Cheat;
     public JTextField redCredit = new JTextField("0",2);
     public JTextField blackCredit = new JTextField("0",2);
+    public JTextField ProgressS = new JTextField("1",2);
     private GameController gameController;
     private static JLabel beginLabel;
     int countRA = 0;
@@ -89,6 +90,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addRedKilled();
         addBlackKilled();
         judgeWinner();
+        addProgressS();
         //增加背景图片（最后）
         ImageIcon bg = new ImageIcon("imgs/GamePicture.png");
         BackLabel = new JLabel(bg);
@@ -241,6 +243,13 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             repaint();
             setVisible(true);
         }
+    }
+    private void addProgressS(){
+        ProgressS.setFont(new Font("Rockwell", Font.BOLD, 25));
+        ProgressS.setLocation(WIDTH * 3 / 5, HEIGHT / 12);
+        ProgressS.setSize(45,40);
+        add(ProgressS);
+        setVisible(true);
     }
 
     private void addRedName() {

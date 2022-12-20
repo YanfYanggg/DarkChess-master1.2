@@ -7,6 +7,7 @@ import chessComponent.EmptySlotComponent;
 import model.ChessColor;
 import view.ChessGameFrame;
 import view.Chessboard;
+import view.Menu;
 
 import java.io.IOException;
 
@@ -118,6 +119,7 @@ public class ClickController {
         }else {
             ShiFouYiHuiHe=true;
         }
+        Menu.chessGameFrame.ProgressS.setText(String.format("%s",progress));
         try {
             chessboard.saveGame();
         } catch (IOException e) {

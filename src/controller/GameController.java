@@ -27,13 +27,13 @@ public class GameController {
         try {
             List<String> chessData = Files.readAllLines(Path.of(path));
             //todo:error check
-            if (!path.endsWith("txt")){
+            if (!path.endsWith(".txt")){
                 JOptionPane.showMessageDialog(chessboard,"error 101");
             }
-            if (chessData.size()!=8){
+            if (chessData.size()!=12){
                 JOptionPane.showMessageDialog(chessboard,"error 102");
             }else for (int i = 0; i < 7; i++) {
-                if (chessData.get(i).length()!=11){
+                if (chessData.get(i).length()!=12){
                     JOptionPane.showMessageDialog(chessboard,"error 102");
                 }
             }
