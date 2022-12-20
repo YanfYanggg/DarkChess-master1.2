@@ -11,10 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Menu extends JFrame implements ActionListener {
     public MyThread t01 = new MyThread("桌面背景音乐");

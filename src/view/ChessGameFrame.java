@@ -2,7 +2,6 @@ package view;
 
 import Musics.MyThread;
 import Musics.Test;
-import com.sun.tools.javac.Main;
 import controller.GameController;
 
 import javax.swing.*;

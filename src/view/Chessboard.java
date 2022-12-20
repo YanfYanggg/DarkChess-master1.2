@@ -433,12 +433,10 @@ public class Chessboard extends JComponent implements Cloneable {
 //    }
     public void saveGame() throws IOException {
         String dir = "Texts/saveGame.txt";
-//        String dir2 = "Texts/regret.txt";
-//        Files.copy(Path.of(dir), Path.of(dir2));
         File file = new File(dir);
-////如果文件不存在，创建文件
-//        if (!file.exists())
-//            file.createNewFile();
+//如果文件不存在，创建文件
+        if (!file.exists())
+            file.createNewFile();
 //创建BufferedWriter对象并向文件写入内容
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 //向文件中写入内容
