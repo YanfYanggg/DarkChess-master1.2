@@ -28,13 +28,15 @@ public class GameController {
             List<String> chessData = Files.readAllLines(Path.of(path));
             if (!path.endsWith(".txt")) {
                 JOptionPane.showMessageDialog(chessboard, "error 101");
+                return null;
             }
             if (chessData.size() != 12) {
                 JOptionPane.showMessageDialog(chessboard, "error 102");
+                return null;
             } else for (int i = 0; i < 8; i++) {
                 if (chessData.get(i).length() != 11&&chessData.get(i).length() != 12) {
                     JOptionPane.showMessageDialog(chessboard, "error 102");
-                    break;
+                    return null;
                 }
             }
             int A = 0, B = 0, C = 0, D = 0, E = 0, F = 0, G = 0, a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0;
@@ -113,9 +115,11 @@ public class GameController {
                 }
             if (A>5||a>5||B>2||b>2||C>2||c>2||D>2||d>2||E>2||e>2||F>2||f>2||G>1||g>1){
                 JOptionPane.showMessageDialog(chessboard, "error 103");
+                return null;
             }
             if (!chessData.get(9).split(" ")[1].equals("is")){
                 JOptionPane.showMessageDialog(chessboard, "error 104");
+                return null;
             }
             chessboard.loadGame2(chessData);
             return chessData;
