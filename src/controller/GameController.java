@@ -32,7 +32,7 @@ public class GameController {
             if (chessData.size() != 12) {
                 JOptionPane.showMessageDialog(chessboard, "error 102");
             } else for (int i = 0; i < 8; i++) {
-                if (chessData.get(i).length() != 11||chessData.get(i).length() != 12) {
+                if (chessData.get(i).length() != 11&&chessData.get(i).length() != 12) {
                     JOptionPane.showMessageDialog(chessboard, "error 102");
                     break;
                 }

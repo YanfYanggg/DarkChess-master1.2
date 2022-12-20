@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -186,8 +187,6 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.setBackground(Color.LIGHT_GRAY);
         add(button);
-
-        //点击buttom触发的事件（只是介绍 没有改方法）
         button.addActionListener(e -> {
             String path1 = "Music/大按钮的副本.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path1);
@@ -214,8 +213,13 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             clickMusic.run = true;
             clickMusic.start();
             System.out.println("Click Save");
+            String path = JOptionPane.showInputDialog(this, "Input Path here");
             //存档功能自己加
-
+            try {
+                chessboard1.saveGame(path);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
         });
     }

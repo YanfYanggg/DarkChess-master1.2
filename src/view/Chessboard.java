@@ -609,6 +609,95 @@ public class Chessboard extends JComponent implements Cloneable {
         bw.write(String.format("%s",getBlack_score()));
         bw.flush();
     }
+    public void saveGame(String youType) throws IOException {
+        File file = new File(youType);
+//如果文件不存在，创建文件
+        if (!file.exists())
+            file.createNewFile();
+//创建BufferedWriter对象并向文件写入内容
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+//向文件中写入内容
+        for (int i = 0; i < squareComponents.length; i++) {
+            for (int j = 0; j < squareComponents[i].length; j++) {
+                if (squareComponents[i][j].getName1() == 11 && squareComponents[i][j].isReversal()) {
+                    bw.write("A1 ");
+                } else if (squareComponents[i][j].getName1() == 11 && !squareComponents[i][j].isReversal()) {
+                    bw.write("A0 ");
+                } else if (squareComponents[i][j].getName1() == 12 && squareComponents[i][j].isReversal()) {
+                    bw.write("B1 ");
+                } else if (squareComponents[i][j].getName1() == 12 && !squareComponents[i][j].isReversal()) {
+                    bw.write("B0 ");
+                } else if (squareComponents[i][j].getName1() == 13 && squareComponents[i][j].isReversal()) {
+                    bw.write("C1 ");
+                } else if (squareComponents[i][j].getName1() == 13 && !squareComponents[i][j].isReversal()) {
+                    bw.write("C0 ");
+                } else if (squareComponents[i][j].getName1() == 14 && squareComponents[i][j].isReversal()) {
+                    bw.write("D1 ");
+                } else if (squareComponents[i][j].getName1() == 14 && !squareComponents[i][j].isReversal()) {
+                    bw.write("D0 ");
+                } else if (squareComponents[i][j].getName1() == 15 && squareComponents[i][j].isReversal()) {
+                    bw.write("E1 ");
+                } else if (squareComponents[i][j].getName1() == 15 && !squareComponents[i][j].isReversal()) {
+                    bw.write("E0 ");
+                } else if (squareComponents[i][j].getName1() == 16 && squareComponents[i][j].isReversal()) {
+                    bw.write("F1 ");
+                } else if (squareComponents[i][j].getName1() == 16 && !squareComponents[i][j].isReversal()) {
+                    bw.write("F0 ");
+                } else if (squareComponents[i][j].getName1() == 17 && squareComponents[i][j].isReversal()) {
+                    bw.write("G1 ");
+                } else if (squareComponents[i][j].getName1() == 17 && !squareComponents[i][j].isReversal()) {
+                    bw.write("G0 ");
+                }
+
+                else if (squareComponents[i][j].getName1() == 21 && squareComponents[i][j].isReversal()) {
+                    bw.write("a1 ");
+                } else if (squareComponents[i][j].getName1() == 21 && !squareComponents[i][j].isReversal()) {
+                    bw.write("a0 ");
+                } else if (squareComponents[i][j].getName1() == 22 && squareComponents[i][j].isReversal()) {
+                    bw.write("b1 ");
+                } else if (squareComponents[i][j].getName1() == 22 && !squareComponents[i][j].isReversal()) {
+                    bw.write("b0 ");
+                } else if (squareComponents[i][j].getName1() == 23 && squareComponents[i][j].isReversal()) {
+                    bw.write("c1 ");
+                } else if (squareComponents[i][j].getName1() == 23 && !squareComponents[i][j].isReversal()) {
+                    bw.write("c0 ");
+                } else if (squareComponents[i][j].getName1() == 24 && squareComponents[i][j].isReversal()) {
+                    bw.write("d1 ");
+                } else if (squareComponents[i][j].getName1() == 24 && !squareComponents[i][j].isReversal()) {
+                    bw.write("d0 ");
+                } else if (squareComponents[i][j].getName1() == 25 && squareComponents[i][j].isReversal()) {
+                    bw.write("e1 ");
+                } else if (squareComponents[i][j].getName1() == 25 && !squareComponents[i][j].isReversal()) {
+                    bw.write("e0 ");
+                } else if (squareComponents[i][j].getName1() == 26 && squareComponents[i][j].isReversal()) {
+                    bw.write("f1 ");
+                } else if (squareComponents[i][j].getName1() == 26 && !squareComponents[i][j].isReversal()) {
+                    bw.write("f0 ");
+                } else if (squareComponents[i][j].getName1() == 27 && squareComponents[i][j].isReversal()) {
+                    bw.write("g1 ");
+                } else if (squareComponents[i][j].getName1() == 27 && !squareComponents[i][j].isReversal()) {
+                    bw.write("g0 ");
+                }else if (squareComponents[i][j].getName1() == 0){
+                    bw.write("em ");
+                }
+            }
+            bw.newLine();
+        }
+
+        bw.write(String.format("%s",clickController.getProgress()));
+        bw.newLine();
+        if (currentColor==ChessColor.RED){
+            bw.write("Red is the next");
+        }
+        else if (currentColor==ChessColor.BLACK){
+            bw.write("Black is the next");
+        }
+        bw.newLine();
+        bw.write(String.format("%s",getRed_score()));
+        bw.newLine();
+        bw.write(String.format("%s",getBlack_score()));
+        bw.flush();
+    }
 
 
 //    public List<String> convertToList() {
