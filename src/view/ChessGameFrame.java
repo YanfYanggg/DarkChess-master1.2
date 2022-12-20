@@ -1,6 +1,8 @@
 package view;
 
+import Musics.MyThread;
 import Musics.Test;
+import com.sun.tools.javac.Main;
 import controller.GameController;
 
 import javax.swing.*;
@@ -16,6 +18,9 @@ import java.util.ArrayList;
  * 3 JButton： 按钮
  */
 public class ChessGameFrame extends JFrame implements ActionListener {
+    MyThread t01 = new MyThread("111");
+    public JButton music;
+    public JButton noMusic;
     public int RedCoins = 0;
     public int BlackCoins = 0;
     public JLabel BackLabel;
@@ -29,7 +34,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     private JButton Cheat;
     public JTextField redCredit = new JTextField("0",2);
     public JTextField blackCredit = new JTextField("0",2);
-    public JTextField ProgressS = new JTextField("1",2);
+    public JLabel ProgressS = new JLabel("1");
     private GameController gameController;
     private static JLabel beginLabel;
     int countRA = 0;
@@ -74,12 +79,14 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
-
+        addMusicButton();
+        t01.start();
         addChessboard();
         addLabel();
         addRestartButton();
         addExitButton();
         addLoadButton();
+        addSaveButton();
         addCheatingBottom();
         addRedName();
         addBlackName();
@@ -92,7 +99,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         judgeWinner();
         addProgressS();
         //增加背景图片（最后）
-        ImageIcon bg = new ImageIcon("imgs/GamePicture.png");
+        ImageIcon bg = new ImageIcon("imgs/对奕背景.png");
         BackLabel = new JLabel(bg);
         BackLabel.setSize(bg.getIconWidth(), bg.getIconHeight());
         this.getLayeredPane().add(BackLabel, new Integer(Integer.MIN_VALUE));
@@ -160,6 +167,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             int value=JOptionPane.showConfirmDialog(null, "     你确定要退出吗？\n本次游戏数据将不会保存", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (value==JOptionPane.YES_OPTION) {
                 this.dispose();
+                Menu menu = new Menu(720,720);
             }
         });
         button.setLocation(WIDTH * 3 / 5 + 100, HEIGHT / 10 + 60);
@@ -169,12 +177,12 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
     /**
-     * 按下按钮输入读档路径
+     * 按下load按钮输入读档路径
      */
     private void addLoadButton() {
         JButton button = new JButton("Load");
         button.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 130);
-        button.setSize(180, 60);
+        button.setSize(100, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         button.setBackground(Color.LIGHT_GRAY);
         add(button);
@@ -188,6 +196,27 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             System.out.println("Click load");
             String path = JOptionPane.showInputDialog(this, "Input Path here");
             gameController.loadGameFromFile(path);
+        });
+    }
+    /**
+     * 按下save按钮存档
+     */
+    public void addSaveButton(){
+        JButton button = new JButton("Save");
+        button.setLocation(WIDTH * 3 / 5 + 100, HEIGHT / 10 + 130);
+        button.setSize(80, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setBackground(Color.LIGHT_GRAY);
+        add(button);
+        button.addActionListener(e -> {
+            String path1 = "Music/大按钮的副本.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path1);
+            clickMusic.run = true;
+            clickMusic.start();
+            System.out.println("Click Save");
+            //存档功能自己加
+
+
         });
     }
 
@@ -245,8 +274,13 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         }
     }
     private void addProgressS(){
+        JLabel label = new JLabel("回合数");
+        label.setSize(200,200);
+        label.setLocation(WIDTH*1/2 - 80,-55);
+        label.setFont(new Font("Rockwell", Font.BOLD, 25));
+        add(label);
         ProgressS.setFont(new Font("Rockwell", Font.BOLD, 25));
-        ProgressS.setLocation(WIDTH * 3 / 5, HEIGHT / 12);
+        ProgressS.setLocation(WIDTH * 1/2, 25);
         ProgressS.setSize(45,40);
         add(ProgressS);
         setVisible(true);
@@ -495,6 +529,30 @@ public class ChessGameFrame extends JFrame implements ActionListener {
                 menu.redCoinsKuang.setText(s1);
                 menu.blackCoinsKuang.setText(s2);
             }
+        }
+    }
+    public void addMusicButton() {
+        noMusic = new JButton("静音");
+        noMusic.setSize(30, 30);
+        noMusic.setLocation(WIDTH * 9 / 10 - 10, 10);
+        add(noMusic);
+        noMusic.addActionListener(this::actionMusic);
+        music = new JButton("声音");
+        music.setSize(30, 30);
+        music.setLocation(WIDTH * 9 / 10 + 30, 10);
+        add(music);
+        setVisible(true);
+        music.addActionListener(this::actionMusic);
+    }
+
+    public void actionMusic(ActionEvent e) {//跳转界面
+        if (e.getSource() == noMusic) {
+            t01.over();
+        }
+
+        if (e.getSource() == music) {
+            MyThread newMusic = new MyThread("重新开始");
+            newMusic.start();
         }
     }
 }
