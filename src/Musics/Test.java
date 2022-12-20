@@ -15,7 +15,7 @@ public class Test {
 
         public AudioPlay2(String path) {
             this.path = path;
-            // playMusic(path);
+            //playMusic(path);
         }
 
         private void playMusic(String path) {

@@ -10,6 +10,8 @@ import controller.ClickController;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.List;
 
@@ -425,12 +427,18 @@ public class Chessboard extends JComponent implements Cloneable {
 //        }
 //        repaint();
 //    }
+//    private static void copyFileUsingJava7Files(File source, File dest)
+//            throws IOException {
+//        Files.copy(source.toPath(), dest.toPath());
+//    }
     public void saveGame() throws IOException {
         String dir = "Texts/saveGame.txt";
+//        String dir2 = "Texts/regret.txt";
+//        Files.copy(Path.of(dir), Path.of(dir2));
         File file = new File(dir);
-//如果文件不存在，创建文件
-        if (!file.exists())
-            file.createNewFile();
+////如果文件不存在，创建文件
+//        if (!file.exists())
+//            file.createNewFile();
 //创建BufferedWriter对象并向文件写入内容
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 //向文件中写入内容
@@ -624,9 +632,8 @@ public class Chessboard extends JComponent implements Cloneable {
         }
         initialGameByCharacters2(chesses);
          clickController.setProgress(Integer.parseInt(chessData.get(8)));
-
         Menu.chessGameFrame.ProgressS.setText(chessData.get(8));
-
+        Menu.chessGameFrame.ProgressS.setText(chessData.get(8));
         if (chessData.get(9).equals("Red is the next")){
             currentColor=ChessColor.RED;
         }
