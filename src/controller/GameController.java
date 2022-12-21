@@ -40,7 +40,6 @@ public class GameController {
                 }
             }
             int A = 0, B = 0, C = 0, D = 0, E = 0, F = 0, G = 0, a = 0, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0;
-            label:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 4; j++) {
                     switch (chessData.get(i).split(" ")[j]) {
