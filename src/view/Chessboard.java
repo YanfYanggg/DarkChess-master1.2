@@ -122,6 +122,7 @@ public class Chessboard extends JComponent implements Cloneable {
 
     /**
      * 交换2棋子位置
+     *
      * @param chess1
      * @param chess2
      */
@@ -359,78 +360,94 @@ public class Chessboard extends JComponent implements Cloneable {
      *
      * @param
      */
-//    public void loadGame(List<String> chessData) {
-//        char[][] chesses = new char[8][4];
-//        for (int i = 0; i < chesses.length; i++) {
-//            for (int j = 0; j < chesses[i].length; j++) {
-//                chesses[i][j] = chessData.get(i).charAt(j);
-//            }
-//        }
-//        initialGameByCharacters(chesses);
-//    }
-//
-//    public void initialGameByCharacters(char[][] chars) {
-//        for (int i = 0; i < squareComponents.length; i++) {
-//            for (int j = 0; j < squareComponents[i].length; j++) {
-//                ChessColor color;
-//                SquareComponent squareComponent = null;
-//                switch (chars[i][j]) {
-//                    case 'A':
-//                        squareComponent = new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'a':
-//                        squareComponent = new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'B':
-//                        squareComponent = new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'b':
-//                        squareComponent = new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'C':
-//                        squareComponent = new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'c':
-//                        squareComponent = new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'D':
-//                        squareComponent = new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'd':
-//                        squareComponent = new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'E':
-//                        squareComponent = new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'e':
-//                        squareComponent = new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'F':
-//                        squareComponent = new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'f':
-//                        squareComponent = new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'G':
-//                        squareComponent = new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'g':
-//                        squareComponent = new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    default:
-//                        squareComponent = new EmptySlotComponent(new ChessboardPoint(i, j), calculatePoint(i, j), clickController, CHESS_SIZE);
-//                        break;
-//                }
-//                squareComponent.setVisible(true);
-//                putChessOnBoard(squareComponent);
-//            }
-//        }
-//        repaint();
-//    }
-//    private static void copyFileUsingJava7Files(File source, File dest)
-//            throws IOException {
-//        Files.copy(source.toPath(), dest.toPath());
-//    }
+    public int step=1;
+    public void recordGame(int step) throws IOException {
+        File file = new File(String.format("recordByStep/%d.txt",step));
+//如果文件不存在，创建文件
+        if (!file.exists())
+            file.createNewFile();
+//创建BufferedWriter对象并向文件写入内容
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+//向文件中写入内容
+        for (int i = 0; i < squareComponents.length; i++) {
+            for (int j = 0; j < squareComponents[i].length; j++) {
+                if (squareComponents[i][j].getName1() == 11 && squareComponents[i][j].isReversal()) {
+                    bw.write("A1 ");
+                } else if (squareComponents[i][j].getName1() == 11 && !squareComponents[i][j].isReversal()) {
+                    bw.write("A0 ");
+                } else if (squareComponents[i][j].getName1() == 12 && squareComponents[i][j].isReversal()) {
+                    bw.write("B1 ");
+                } else if (squareComponents[i][j].getName1() == 12 && !squareComponents[i][j].isReversal()) {
+                    bw.write("B0 ");
+                } else if (squareComponents[i][j].getName1() == 13 && squareComponents[i][j].isReversal()) {
+                    bw.write("C1 ");
+                } else if (squareComponents[i][j].getName1() == 13 && !squareComponents[i][j].isReversal()) {
+                    bw.write("C0 ");
+                } else if (squareComponents[i][j].getName1() == 14 && squareComponents[i][j].isReversal()) {
+                    bw.write("D1 ");
+                } else if (squareComponents[i][j].getName1() == 14 && !squareComponents[i][j].isReversal()) {
+                    bw.write("D0 ");
+                } else if (squareComponents[i][j].getName1() == 15 && squareComponents[i][j].isReversal()) {
+                    bw.write("E1 ");
+                } else if (squareComponents[i][j].getName1() == 15 && !squareComponents[i][j].isReversal()) {
+                    bw.write("E0 ");
+                } else if (squareComponents[i][j].getName1() == 16 && squareComponents[i][j].isReversal()) {
+                    bw.write("F1 ");
+                } else if (squareComponents[i][j].getName1() == 16 && !squareComponents[i][j].isReversal()) {
+                    bw.write("F0 ");
+                } else if (squareComponents[i][j].getName1() == 17 && squareComponents[i][j].isReversal()) {
+                    bw.write("G1 ");
+                } else if (squareComponents[i][j].getName1() == 17 && !squareComponents[i][j].isReversal()) {
+                    bw.write("G0 ");
+                } else if (squareComponents[i][j].getName1() == 21 && squareComponents[i][j].isReversal()) {
+                    bw.write("a1 ");
+                } else if (squareComponents[i][j].getName1() == 21 && !squareComponents[i][j].isReversal()) {
+                    bw.write("a0 ");
+                } else if (squareComponents[i][j].getName1() == 22 && squareComponents[i][j].isReversal()) {
+                    bw.write("b1 ");
+                } else if (squareComponents[i][j].getName1() == 22 && !squareComponents[i][j].isReversal()) {
+                    bw.write("b0 ");
+                } else if (squareComponents[i][j].getName1() == 23 && squareComponents[i][j].isReversal()) {
+                    bw.write("c1 ");
+                } else if (squareComponents[i][j].getName1() == 23 && !squareComponents[i][j].isReversal()) {
+                    bw.write("c0 ");
+                } else if (squareComponents[i][j].getName1() == 24 && squareComponents[i][j].isReversal()) {
+                    bw.write("d1 ");
+                } else if (squareComponents[i][j].getName1() == 24 && !squareComponents[i][j].isReversal()) {
+                    bw.write("d0 ");
+                } else if (squareComponents[i][j].getName1() == 25 && squareComponents[i][j].isReversal()) {
+                    bw.write("e1 ");
+                } else if (squareComponents[i][j].getName1() == 25 && !squareComponents[i][j].isReversal()) {
+                    bw.write("e0 ");
+                } else if (squareComponents[i][j].getName1() == 26 && squareComponents[i][j].isReversal()) {
+                    bw.write("f1 ");
+                } else if (squareComponents[i][j].getName1() == 26 && !squareComponents[i][j].isReversal()) {
+                    bw.write("f0 ");
+                } else if (squareComponents[i][j].getName1() == 27 && squareComponents[i][j].isReversal()) {
+                    bw.write("g1 ");
+                } else if (squareComponents[i][j].getName1() == 27 && !squareComponents[i][j].isReversal()) {
+                    bw.write("g0 ");
+                } else if (squareComponents[i][j].getName1() == 0) {
+                    bw.write("em ");
+                }
+            }
+            bw.newLine();
+        }
+        bw.write(String.format("%s", clickController.getProgress()));
+        bw.newLine();
+        if (currentColor == ChessColor.RED) {
+            bw.write("Red is the next");
+        } else if (currentColor == ChessColor.BLACK) {
+            bw.write("Black is the next");
+        }
+        bw.newLine();
+        bw.write(String.format("%s", getRed_score()));
+        bw.newLine();
+        bw.write(String.format("%s", getBlack_score()));
+        bw.flush();
+        this.step++;
+    }
+
     public void saveGame() throws IOException {
         String dir = "Texts/saveGame.txt";
         File file = new File(dir);
@@ -470,9 +487,7 @@ public class Chessboard extends JComponent implements Cloneable {
                     bw.write("G1 ");
                 } else if (squareComponents[i][j].getName1() == 17 && !squareComponents[i][j].isReversal()) {
                     bw.write("G0 ");
-                }
-
-                else if (squareComponents[i][j].getName1() == 21 && squareComponents[i][j].isReversal()) {
+                } else if (squareComponents[i][j].getName1() == 21 && squareComponents[i][j].isReversal()) {
                     bw.write("a1 ");
                 } else if (squareComponents[i][j].getName1() == 21 && !squareComponents[i][j].isReversal()) {
                     bw.write("a0 ");
@@ -500,7 +515,7 @@ public class Chessboard extends JComponent implements Cloneable {
                     bw.write("g1 ");
                 } else if (squareComponents[i][j].getName1() == 27 && !squareComponents[i][j].isReversal()) {
                     bw.write("g0 ");
-                }else if (squareComponents[i][j].getName1() == 0){
+                } else if (squareComponents[i][j].getName1() == 0) {
                     bw.write("em ");
                 }
 
@@ -593,21 +608,21 @@ public class Chessboard extends JComponent implements Cloneable {
             bw.newLine();
         }
 
-        bw.write(String.format("%s",clickController.getProgress()));
+        bw.write(String.format("%s", clickController.getProgress()));
         bw.newLine();
-        if (currentColor==ChessColor.RED){
+        if (currentColor == ChessColor.RED) {
             bw.write("Red is the next");
-        }
-        else if (currentColor==ChessColor.BLACK){
+        } else if (currentColor == ChessColor.BLACK) {
             bw.write("Black is the next");
         }
         bw.newLine();
-        bw.write(String.format("%s",getRed_score()));
+        bw.write(String.format("%s", getRed_score()));
         bw.newLine();
-        bw.write(String.format("%s",getBlack_score()));
+        bw.write(String.format("%s", getBlack_score()));
         bw.flush();
     }
-    public void saveGame(String youType) throws IOException {
+
+    public void saveGameByButton(String youType) throws IOException {
         File file = new File(youType);
 //如果文件不存在，创建文件
         if (!file.exists())
@@ -645,9 +660,7 @@ public class Chessboard extends JComponent implements Cloneable {
                     bw.write("G1 ");
                 } else if (squareComponents[i][j].getName1() == 17 && !squareComponents[i][j].isReversal()) {
                     bw.write("G0 ");
-                }
-
-                else if (squareComponents[i][j].getName1() == 21 && squareComponents[i][j].isReversal()) {
+                } else if (squareComponents[i][j].getName1() == 21 && squareComponents[i][j].isReversal()) {
                     bw.write("a1 ");
                 } else if (squareComponents[i][j].getName1() == 21 && !squareComponents[i][j].isReversal()) {
                     bw.write("a0 ");
@@ -675,25 +688,24 @@ public class Chessboard extends JComponent implements Cloneable {
                     bw.write("g1 ");
                 } else if (squareComponents[i][j].getName1() == 27 && !squareComponents[i][j].isReversal()) {
                     bw.write("g0 ");
-                }else if (squareComponents[i][j].getName1() == 0){
+                } else if (squareComponents[i][j].getName1() == 0) {
                     bw.write("em ");
                 }
             }
             bw.newLine();
         }
 
-        bw.write(String.format("%s",clickController.getProgress()));
+        bw.write(String.format("%s", clickController.getProgress()));
         bw.newLine();
-        if (currentColor==ChessColor.RED){
+        if (currentColor == ChessColor.RED) {
             bw.write("Red is the next");
-        }
-        else if (currentColor==ChessColor.BLACK){
+        } else if (currentColor == ChessColor.BLACK) {
             bw.write("Black is the next");
         }
         bw.newLine();
-        bw.write(String.format("%s",getRed_score()));
+        bw.write(String.format("%s", getRed_score()));
         bw.newLine();
-        bw.write(String.format("%s",getBlack_score()));
+        bw.write(String.format("%s", getBlack_score()));
         bw.flush();
     }
 
@@ -718,14 +730,13 @@ public class Chessboard extends JComponent implements Cloneable {
             }
         }
         initialGameByCharacters2(chesses);
-         clickController.setProgress(Integer.parseInt(chessData.get(8)));
+        clickController.setProgress(Integer.parseInt(chessData.get(8)));
         Menu.chessGameFrame.ProgressS.setText(chessData.get(8));
         Menu.chessGameFrame.ProgressS.setText(chessData.get(8));
-        if (chessData.get(9).equals("Red is the next")){
-            currentColor=ChessColor.RED;
-        }
-        else if (chessData.get(9).equals("Black is the next")){
-            currentColor=ChessColor.BLACK;
+        if (chessData.get(9).equals("Red is the next")) {
+            currentColor = ChessColor.RED;
+        } else if (chessData.get(9).equals("Black is the next")) {
+            currentColor = ChessColor.BLACK;
         }
         setRed_score(Integer.parseInt(chessData.get(10)));
         Menu.chessGameFrame.redCredit.setText(chessData.get(10));

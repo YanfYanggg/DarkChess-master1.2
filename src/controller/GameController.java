@@ -43,11 +43,6 @@ public class GameController {
             label:
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 4; j++) {
-//                    if (!chessData.get(i).split(" ")[j].equals("A0") && !chessData.get(i).split(" ")[j].equals("B0") && !chessData.get(i).split(" ")[j].equals("C0") && !chessData.get(i).split(" ")[j].equals("D0") && !chessData.get(i).split(" ")[j].equals("E0") && !chessData.get(i).split(" ")[j].equals("F0") && !chessData.get(i).split(" ")[j].equals("G0") && !chessData.get(i).split(" ")[j].equals("A1") && !chessData.get(i).split(" ")[j].equals("B1") && !chessData.get(i).split(" ")[j].equals("C1") && !chessData.get(i).split(" ")[j].equals("D1") && !chessData.get(i).split(" ")[j].equals("E1") && !chessData.get(i).split(" ")[j].equals("F1") && !chessData.get(i).split(" ")[j].equals("A0") && !chessData.get(i).split(" ")[j].equals("G1")
-//                            && !chessData.get(i).split(" ")[j].equals("a0") && !chessData.get(i).split(" ")[j].equals("b0") && !chessData.get(i).split(" ")[j].equals("c0") && !chessData.get(i).split(" ")[j].equals("d0") && !chessData.get(i).split(" ")[j].equals("e0") && !chessData.get(i).split(" ")[j].equals("f0") && !chessData.get(i).split(" ")[j].equals("g0") && !chessData.get(i).split(" ")[j].equals("a1") && !chessData.get(i).split(" ")[j].equals("b1") && !chessData.get(i).split(" ")[j].equals("c1") && !chessData.get(i).split(" ")[j].equals("d1") && !chessData.get(i).split(" ")[j].equals("e1") && !chessData.get(i).split(" ")[j].equals("f1") && !chessData.get(i).split(" ")[j].equals("g1") && !chessData.get(i).split(" ")[j].equals("em")) {
-//                        JOptionPane.showMessageDialog(chessboard, "error 103");
-//                        break label;
-//                    }
                     switch (chessData.get(i).split(" ")[j]) {
                         case "A0":
                         case "A1":
@@ -128,8 +123,20 @@ public class GameController {
         }
         return null;
     }
+    //悔棋
+
+    public void regret(){
+        if (chessboard.step>1){
+            chessboard.step--;
+            loadGameFromFile(String.format("recordByStep/%d.txt",chessboard.step));
+        }else{
+            //弹出已是第一步了，不能再悔棋了
+        }
+
+    }
 
     public void restartGame() {
+        chessboard.step=1;
         Menu.chessGameFrame = new ChessGameFrame(720, 720);
 
     }

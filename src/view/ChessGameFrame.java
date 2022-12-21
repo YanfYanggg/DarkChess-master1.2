@@ -215,7 +215,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             String path = JOptionPane.showInputDialog(this, "Input Path here");
             //存档功能自己加
             try {
-                chessboard1.saveGame(path);
+                chessboard1.saveGameByButton(path);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

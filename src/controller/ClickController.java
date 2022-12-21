@@ -121,7 +121,7 @@ public class ClickController {
         }
         Menu.chessGameFrame.ProgressS.setText(String.format("%s",progress));
         try {
-            chessboard.saveGame();
+            chessboard.recordGame(chessboard.step);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
