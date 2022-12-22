@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class ChessGameFrame extends JFrame implements ActionListener {
     MyThread t01 = new MyThread("111");
+    public JButton regret;
     public JButton music;
     public JButton noMusic;
     public int RedCoins = 0;
@@ -84,6 +85,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addChessboard();
         addLabel();
         addRestartButton();
+        addRegret();
         addExitButton();
         addLoadButton();
         addSaveButton();
@@ -228,17 +230,16 @@ public class ChessGameFrame extends JFrame implements ActionListener {
      */
     private void addCheatingBottom() {
         Cheat = new JButton("Cheat");
-        close = new JButton("Close");
         Cheat.setLocation(WIDTH * 3 / 5 + 10, HEIGHT / 10 + 200);
-        close.setLocation(WIDTH * 3 / 5 + 90, HEIGHT / 10 + 200);
         Cheat.setSize(80, 60);
-        close.setSize(80,60);
         Cheat.setFont(new Font("Rockwell", Font.BOLD, 20));
-        close.setFont(new Font("Rockwell", Font.BOLD, 20));
-        Cheat.setBackground(Color.blue);//为什么没颜色？
         add(Cheat);
-        add(close);
         Cheat.addActionListener(this::actionPerformed);
+        close = new JButton("Close");
+        close.setLocation(WIDTH * 3 / 5 + 90, HEIGHT / 10 + 200);
+        close.setSize(80,60);
+        close.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(close);
         close.addActionListener(this::actionPerformed);
         setVisible(true);
     }
@@ -276,6 +277,21 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             setVisible(true);
         }
     }
+
+    /**
+     * 悔棋按钮
+     */
+    public void addRegret(){
+        regret = new JButton("Regret");
+        regret.setSize(100,60);
+        regret.setLocation(0,10);
+        regret.setFont(new Font("Rockwell", Font.BOLD, 16));
+        add(regret);
+        regret.setVisible(true);
+    }
+
+
+
     private void addProgressS(){
         JLabel label = new JLabel("回合数");
         label.setSize(200,200);

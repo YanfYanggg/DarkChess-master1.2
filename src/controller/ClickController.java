@@ -21,20 +21,21 @@ public class ClickController {
 
     public void onClick(SquareComponent squareComponent) {
         //判断第一次点击
-        if (first == null) {//初次点击
+        if (first == null) {//之前没有点过
             String path = "Music/棋子按键音.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
             clickMusic.run = true;
             clickMusic.start();
-            if (handleFirst(squareComponent)) {
-                squareComponent.setSelected(true);//标红状态
+            if (handleFirst(squareComponent)) {//这个点到的棋子是handleFirst状态
+                squareComponent.setSelected(true);//选择标红
                 first = squareComponent;
                 first.repaint();
-                //first.judgeProbable();
+                first.JudgeProbable(chessboard.getChessComponents());
             }
         }
         else {//点到有棋子的
             if (first == squareComponent) { // 再次点击自己，取消选取
+                squareComponent.JudgeNotProbable(chessboard.getChessComponents());
                 squareComponent.setSelected(false);
                 SquareComponent recordFirst = first;
                 first = null;
@@ -48,7 +49,6 @@ public class ClickController {
             }
         }
     }
-
 
     /**
      * @param squareComponent 目标选取的棋子
