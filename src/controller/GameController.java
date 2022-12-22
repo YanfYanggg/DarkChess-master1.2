@@ -114,6 +114,7 @@ public class GameController {
                 return null;
             }
             chessboard.loadGame2(chessData);
+            //例如：红兵被吃掉的个数：5-A;黑炮被吃掉的个数：2-b;
             return chessData;
         } catch (IOException e) {
             e.printStackTrace();
@@ -121,7 +122,6 @@ public class GameController {
         return null;
     }
     //悔棋
-
     public void regret(){
         if (chessboard.step>0){
             chessboard.step--;

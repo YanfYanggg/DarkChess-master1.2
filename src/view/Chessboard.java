@@ -692,7 +692,6 @@ public class Chessboard extends JComponent implements Cloneable {
             }
             bw.newLine();
         }
-
         bw.write(String.format("%s", clickController.getProgress()));
         bw.newLine();
         if (currentColor == ChessColor.RED) {
@@ -706,19 +705,6 @@ public class Chessboard extends JComponent implements Cloneable {
         bw.write(String.format("%s", getBlack_score()));
         bw.flush();
     }
-
-
-//    public List<String> convertToList() {
-//        List<String> lines = new ArrayList<>();
-//        StringBuilder sb = new StringBuilder();
-//        for (SquareComponent[] a:this.squareComponents) {
-//            sb.setLength(0);
-//
-//            sb.setLength(sb.length() - 1);
-//            lines.add(sb.toString());
-//        }
-//        return lines;
-//    }
 
     public void loadGame2(List<String> chessData) {
         String[][] chesses = new String[8][4];
@@ -862,48 +848,6 @@ public class Chessboard extends JComponent implements Cloneable {
                     default:
                         squareComponent = new EmptySlotComponent(new ChessboardPoint(i, j), calculatePoint(i, j), clickController, CHESS_SIZE);
                         break;
-//                    case 'a':
-//                        squareComponent = new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'B':
-//                        squareComponent = new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'b':
-//                        squareComponent = new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'C':
-//                        squareComponent = new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'c':
-//                        squareComponent = new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'D':
-//                        squareComponent = new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'd':
-//                        squareComponent = new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'E':
-//                        squareComponent = new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'e':
-//                        squareComponent = new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'F':
-//                        squareComponent = new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'f':
-//                        squareComponent = new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'G':
-//                        squareComponent = new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE);
-//                        break;
-//                    case 'g':
-//                        squareComponent = new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE);
-//                        break;
-//                    default:
-//                        squareComponent = new EmptySlotComponent(new ChessboardPoint(i, j), calculatePoint(i, j), clickController, CHESS_SIZE);
-//                        break;
                 }
                 squareComponent.setVisible(true);
                 putChessOnBoard(squareComponent);
