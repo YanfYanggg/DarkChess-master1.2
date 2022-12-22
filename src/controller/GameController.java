@@ -5,6 +5,7 @@ import view.Chessboard;
 import view.Menu;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -123,6 +124,11 @@ public class GameController {
     }
     //悔棋
     public void regret(){
+        File file = new File(String.format("recordByStep/%d.txt",chessboard.step));
+//如果文件不存在，创建文件
+        if (!file.exists()){
+            chessboard.step--;
+        }
         if (chessboard.step>0){
             chessboard.step--;
             loadGameFromFile(String.format("recordByStep/%d.txt",chessboard.step));
@@ -130,6 +136,11 @@ public class GameController {
     }
 
     public void restartGame() {
+        chessboard.step=100;
+        for (int i = 0; i < chessboard.step; i++) {
+            File file = new File(String.format("recordByStep/%d.txt",i));
+            file.delete();
+        }
         chessboard.step=0;
         Menu.chessGameFrame = new ChessGameFrame(720, 720);
 
