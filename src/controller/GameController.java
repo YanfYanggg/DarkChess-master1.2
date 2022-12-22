@@ -21,8 +21,6 @@ public class GameController {
     public GameController(Chessboard chessboard) {
         this.chessboard = chessboard;
     }
-
-    //这个方法是写  如何从文件中读取数据  ！！  sakai第介绍38分钟  我没有改这个方法，存档
     public List<String> loadGameFromFile(String path) {
         try {
             List<String> chessData = Files.readAllLines(Path.of(path));
@@ -125,17 +123,14 @@ public class GameController {
     //悔棋
 
     public void regret(){
-        if (chessboard.step>1){
+        if (chessboard.step>0){
             chessboard.step--;
             loadGameFromFile(String.format("recordByStep/%d.txt",chessboard.step));
-        }else{
-            //弹出已是第一步了，不能再悔棋了
         }
-
     }
 
     public void restartGame() {
-        chessboard.step=1;
+        chessboard.step=0;
         Menu.chessGameFrame = new ChessGameFrame(720, 720);
 
     }

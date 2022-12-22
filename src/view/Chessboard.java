@@ -207,11 +207,6 @@ public class Chessboard extends JComponent implements Cloneable {
         Menu.chessGameFrame.redCredit.setText(s1);
         Menu.chessGameFrame.blackCredit.setText(s2);
         Menu.chessGameFrame.judgeWinner();
-        try {
-            saveGame();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     //增加一个方法，先弄出一个list，再按list中的数字给棋子初始化
@@ -286,7 +281,7 @@ public class Chessboard extends JComponent implements Cloneable {
         }
         repaint();
         try {
-            saveGame();
+            recordGame(step);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -363,7 +358,7 @@ public class Chessboard extends JComponent implements Cloneable {
      *
      * @param
      */
-    public int step=1;
+    public int step=0;
     public void recordGame(int step) throws IOException {
         File file = new File(String.format("recordByStep/%d.txt",step));
 //如果文件不存在，创建文件
@@ -451,179 +446,179 @@ public class Chessboard extends JComponent implements Cloneable {
         this.step++;
     }
 
-    public void saveGame() throws IOException {
-        String dir = "Texts/saveGame.txt";
-        File file = new File(dir);
-//如果文件不存在，创建文件
-        if (!file.exists())
-            file.createNewFile();
-//创建BufferedWriter对象并向文件写入内容
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-//向文件中写入内容
-        for (int i = 0; i < squareComponents.length; i++) {
-            for (int j = 0; j < squareComponents[i].length; j++) {
-                if (squareComponents[i][j].getName1() == 11 && squareComponents[i][j].isReversal()) {
-                    bw.write("A1 ");
-                } else if (squareComponents[i][j].getName1() == 11 && !squareComponents[i][j].isReversal()) {
-                    bw.write("A0 ");
-                } else if (squareComponents[i][j].getName1() == 12 && squareComponents[i][j].isReversal()) {
-                    bw.write("B1 ");
-                } else if (squareComponents[i][j].getName1() == 12 && !squareComponents[i][j].isReversal()) {
-                    bw.write("B0 ");
-                } else if (squareComponents[i][j].getName1() == 13 && squareComponents[i][j].isReversal()) {
-                    bw.write("C1 ");
-                } else if (squareComponents[i][j].getName1() == 13 && !squareComponents[i][j].isReversal()) {
-                    bw.write("C0 ");
-                } else if (squareComponents[i][j].getName1() == 14 && squareComponents[i][j].isReversal()) {
-                    bw.write("D1 ");
-                } else if (squareComponents[i][j].getName1() == 14 && !squareComponents[i][j].isReversal()) {
-                    bw.write("D0 ");
-                } else if (squareComponents[i][j].getName1() == 15 && squareComponents[i][j].isReversal()) {
-                    bw.write("E1 ");
-                } else if (squareComponents[i][j].getName1() == 15 && !squareComponents[i][j].isReversal()) {
-                    bw.write("E0 ");
-                } else if (squareComponents[i][j].getName1() == 16 && squareComponents[i][j].isReversal()) {
-                    bw.write("F1 ");
-                } else if (squareComponents[i][j].getName1() == 16 && !squareComponents[i][j].isReversal()) {
-                    bw.write("F0 ");
-                } else if (squareComponents[i][j].getName1() == 17 && squareComponents[i][j].isReversal()) {
-                    bw.write("G1 ");
-                } else if (squareComponents[i][j].getName1() == 17 && !squareComponents[i][j].isReversal()) {
-                    bw.write("G0 ");
-                } else if (squareComponents[i][j].getName1() == 21 && squareComponents[i][j].isReversal()) {
-                    bw.write("a1 ");
-                } else if (squareComponents[i][j].getName1() == 21 && !squareComponents[i][j].isReversal()) {
-                    bw.write("a0 ");
-                } else if (squareComponents[i][j].getName1() == 22 && squareComponents[i][j].isReversal()) {
-                    bw.write("b1 ");
-                } else if (squareComponents[i][j].getName1() == 22 && !squareComponents[i][j].isReversal()) {
-                    bw.write("b0 ");
-                } else if (squareComponents[i][j].getName1() == 23 && squareComponents[i][j].isReversal()) {
-                    bw.write("c1 ");
-                } else if (squareComponents[i][j].getName1() == 23 && !squareComponents[i][j].isReversal()) {
-                    bw.write("c0 ");
-                } else if (squareComponents[i][j].getName1() == 24 && squareComponents[i][j].isReversal()) {
-                    bw.write("d1 ");
-                } else if (squareComponents[i][j].getName1() == 24 && !squareComponents[i][j].isReversal()) {
-                    bw.write("d0 ");
-                } else if (squareComponents[i][j].getName1() == 25 && squareComponents[i][j].isReversal()) {
-                    bw.write("e1 ");
-                } else if (squareComponents[i][j].getName1() == 25 && !squareComponents[i][j].isReversal()) {
-                    bw.write("e0 ");
-                } else if (squareComponents[i][j].getName1() == 26 && squareComponents[i][j].isReversal()) {
-                    bw.write("f1 ");
-                } else if (squareComponents[i][j].getName1() == 26 && !squareComponents[i][j].isReversal()) {
-                    bw.write("f0 ");
-                } else if (squareComponents[i][j].getName1() == 27 && squareComponents[i][j].isReversal()) {
-                    bw.write("g1 ");
-                } else if (squareComponents[i][j].getName1() == 27 && !squareComponents[i][j].isReversal()) {
-                    bw.write("g0 ");
-                } else if (squareComponents[i][j].getName1() == 0) {
-                    bw.write("em ");
-                }
-
-
-//                if (squareComponents[i][j].toString().equals(new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//    public void saveGame() throws IOException {
+//        String dir = "";
+//        File file = new File(dir);
+////如果文件不存在，创建文件
+//        if (!file.exists())
+//            file.createNewFile();
+////创建BufferedWriter对象并向文件写入内容
+//        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+////向文件中写入内容
+//        for (int i = 0; i < squareComponents.length; i++) {
+//            for (int j = 0; j < squareComponents[i].length; j++) {
+//                if (squareComponents[i][j].getName1() == 11 && squareComponents[i][j].isReversal()) {
 //                    bw.write("A1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 11 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("A0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 12 && squareComponents[i][j].isReversal()) {
 //                    bw.write("B1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 12 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("B0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 13 && squareComponents[i][j].isReversal()) {
 //                    bw.write("C1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 13 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("C0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 14 && squareComponents[i][j].isReversal()) {
 //                    bw.write("D1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 14 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("D0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 15 && squareComponents[i][j].isReversal()) {
 //                    bw.write("E1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 15 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("E0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 16 && squareComponents[i][j].isReversal()) {
 //                    bw.write("F1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 16 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("F0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 17 && squareComponents[i][j].isReversal()) {
 //                    bw.write("G1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+//                } else if (squareComponents[i][j].getName1() == 17 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("G0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 21 && squareComponents[i][j].isReversal()) {
 //                    bw.write("a1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 21 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("a0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 22 && squareComponents[i][j].isReversal()) {
 //                    bw.write("b1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 22 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("b0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 23 && squareComponents[i][j].isReversal()) {
 //                    bw.write("c1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 23 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("c0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 24 && squareComponents[i][j].isReversal()) {
 //                    bw.write("d1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 24 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("d0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 25 && squareComponents[i][j].isReversal()) {
 //                    bw.write("e1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 25 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("e0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 26 && squareComponents[i][j].isReversal()) {
 //                    bw.write("f1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 26 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("f0 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 27 && squareComponents[i][j].isReversal()) {
 //                    bw.write("g1 ");
-//                }
-//                else if (squareComponents[i][j].toString().equals(new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+//                } else if (squareComponents[i][j].getName1() == 27 && !squareComponents[i][j].isReversal()) {
 //                    bw.write("g0 ");
+//                } else if (squareComponents[i][j].getName1() == 0) {
+//                    bw.write("em ");
 //                }
-            }
-            bw.newLine();
-        }
-
-        bw.write(String.format("%s", clickController.getProgress()));
-        bw.newLine();
-        if (currentColor == ChessColor.RED) {
-            bw.write("Red is the next");
-        } else if (currentColor == ChessColor.BLACK) {
-            bw.write("Black is the next");
-        }
-        bw.newLine();
-        bw.write(String.format("%s", getRed_score()));
-        bw.newLine();
-        bw.write(String.format("%s", getBlack_score()));
-        bw.flush();
-    }
+//
+//
+////                if (squareComponents[i][j].toString().equals(new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("A1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("A0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("B1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("B0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("C1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("C0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("D1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("D0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("E1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("E0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("F1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("F0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("G1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.RED, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.RED) {
+////                    bw.write("G0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("a1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new SoldierChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("a0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("b1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new CannonChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("b0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("c1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new ChariotChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("c0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("d1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new HorseChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("d0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("e1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new MinisterChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("e0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("f1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new AdvisorChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("f0 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("g1 ");
+////                }
+////                else if (squareComponents[i][j].toString().equals(new GeneralChessComponent(new ChessboardPoint(i, j), calculatePoint(i, j), ChessColor.BLACK, clickController, CHESS_SIZE).toString()) && !squareComponents[i][j].isReversal() && squareComponents[i][j].getChessColor() == ChessColor.BLACK) {
+////                    bw.write("g0 ");
+////                }
+//            }
+//            bw.newLine();
+//        }
+//
+//        bw.write(String.format("%s", clickController.getProgress()));
+//        bw.newLine();
+//        if (currentColor == ChessColor.RED) {
+//            bw.write("Red is the next");
+//        } else if (currentColor == ChessColor.BLACK) {
+//            bw.write("Black is the next");
+//        }
+//        bw.newLine();
+//        bw.write(String.format("%s", getRed_score()));
+//        bw.newLine();
+//        bw.write(String.format("%s", getBlack_score()));
+//        bw.flush();
+//    }
 
     public void saveGameByButton(String youType) throws IOException {
         File file = new File(youType);
