@@ -128,6 +128,7 @@ public class Chessboard extends JComponent implements Cloneable {
      */
     public void swapChessComponents(SquareComponent chess1, SquareComponent chess2) {
         // Note that chess1 has higher priority, 'destroys' chess2 if exists.
+        chess1.JudgeNotProbable(this.getChessComponents());
         if (!(chess2 instanceof EmptySlotComponent)) {
             if (chess2.getChessColor() == ChessColor.BLACK) {//吃黑色的chess2
                 Red_score += AddHowMuchScore(chess2);
@@ -291,6 +292,7 @@ public class Chessboard extends JComponent implements Cloneable {
         }
     }
 
+
     /**
      * 写cheating mode
      */
@@ -342,6 +344,7 @@ public class Chessboard extends JComponent implements Cloneable {
         super.paintComponent(g);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
         ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
     }
 
     /**

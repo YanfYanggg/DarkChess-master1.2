@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 public abstract class SquareComponent extends JComponent{
     private static final Color squareColor = new Color(250, 220, 190);
     protected static int spacingLength;
+
     protected static final Font CHESS_FONT = new Font("宋体", Font.BOLD, 36);
 
     /**
@@ -33,7 +34,13 @@ public abstract class SquareComponent extends JComponent{
     protected final ChessColor chessColor;//枚举类的使用
     protected boolean isReversal;
     private boolean selected;
+
+    public void setProbable(boolean probable) {
+        isProbable = probable;
+    }
+
     public boolean isProbable;
+
     protected int rank;
     protected int name1;
 
@@ -71,14 +78,6 @@ public abstract class SquareComponent extends JComponent{
     public void setReversal(boolean reversal) {
         isReversal = reversal;
     }
-    public boolean isProbable() {
-        return isProbable;
-    }
-
-    public void setProbable(boolean probable) {
-        isProbable = probable;
-    }
-
     public static void setSpacingLength(int spacingLength) {
         SquareComponent.spacingLength = spacingLength;
     }
@@ -215,6 +214,31 @@ public abstract class SquareComponent extends JComponent{
 //        return destinationChess.isReversal|| destinationChess instanceof EmptySlotComponent;
     }
 
+    /**
+     * 预测步骤
+     */
+    public void JudgeProbable(SquareComponent[][] chessboard){
+        for(int i = 0; i < chessboard.length; i++){
+            for(int j = 0; j < chessboard[i].length; j++){
+                if(this.canMoveTo(chessboard,chessboard[i][j].getChessboardPoint())){
+                    chessboard[i][j].setProbable(true);
+                    chessboard[i][j].repaint();
+                }
+            }
+        }
+    }
+    public void JudgeNotProbable(SquareComponent[][] chessboard){
+        for(int i = 0; i < chessboard.length; i++){
+            for(int j = 0; j < chessboard[i].length; j++){
+                if(this.canMoveTo(chessboard,chessboard[i][j].getChessboardPoint())){
+                    chessboard[i][j].setProbable(false);
+                    chessboard[i][j].repaint();
+                }
+            }
+        }
+    }
+
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -222,25 +246,14 @@ public abstract class SquareComponent extends JComponent{
         System.out.printf("repaint chess [%d,%d]\n", chessboardPoint.getX(), chessboardPoint.getY());
         g.setColor(squareColor);
         g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
-    }
-
-    /**
-     * 为了在判断isprobable时用point找棋子加的方法
-     * @param chessboard
-     * @param chessboardPoint
-     * @return
-     */
-    public SquareComponent searchChess(SquareComponent[][] chessboard,ChessboardPoint chessboardPoint){
-        SquareComponent target = null;
-        for(int i = 0; i < chessboard.length; i++){
-            for(int j = 0; j < chessboard[i].length; j++){
-                if(i == chessboardPoint.getX() && j == chessboardPoint.getY())
-                    target = chessboard[i][j];
-            }
+        //绘制预测步伐中可能可以走的棋子/位置（还要把空位给加上！！！）
+        if (isProbable){
+            g.setColor(Color.GREEN);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(new BasicStroke(4f));
+            g2.drawRect(spacingLength - 2, spacingLength - 2, getWidth()  - 2 * spacingLength + 3, getHeight() - 2 * spacingLength + 3);
         }
-        return target;
     }
 
 
-
-}
+ }
