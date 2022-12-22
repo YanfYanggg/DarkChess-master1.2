@@ -131,13 +131,12 @@ public class GameController {
         }
         if (chessboard.step>0){
             chessboard.step--;
-            loadGameFromFile(String.format("recordByStep/%d.txt",chessboard.step));
+            chessboard.loadGame2(loadGameFromFile(String.format("recordByStep/%d.txt",chessboard.step)));
         }
     }
 
     public void restartGame() {
-        chessboard.step=100;
-        for (int i = 0; i < chessboard.step; i++) {
+        for (int i = 0; i < 1000; i++) {
             File file = new File(String.format("recordByStep/%d.txt",i));
             file.delete();
         }

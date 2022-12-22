@@ -722,6 +722,7 @@ public class Chessboard extends JComponent implements Cloneable {
         } else if (chessData.get(9).equals("Black is the next")) {
             currentColor = ChessColor.BLACK;
         }
+        ChessGameFrame.getBeginLabel().setText(String.format("%s's TURN", currentColor.getName()));
         setRed_score(Integer.parseInt(chessData.get(10)));
         Menu.chessGameFrame.redCredit.setText(chessData.get(10));
         setBlack_score(Integer.parseInt(chessData.get(11)));
