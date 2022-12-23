@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -71,7 +72,6 @@ public class Menu extends JFrame implements ActionListener {
     @Override
 
     public void actionPerformed(ActionEvent e) {//跳转界面
-
         if (e.getSource() == Game_Start) {
             t01.over();
             String path = "Music/大按钮的副本.wav";
