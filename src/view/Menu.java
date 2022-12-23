@@ -4,6 +4,7 @@ package view;
  * Shelly：要去建立一个窗口（游戏的初始界面）
  */
 
+import Musics.MenuThread;
 import Musics.MyThread;
 import Musics.Test;
 
@@ -15,7 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Menu extends JFrame implements ActionListener {
-    public MyThread t01 = new MyThread("桌面背景音乐");
+    public MenuThread t01 = new MenuThread("桌面背景音乐");
     public JButton music;
     public JButton noMusic;
     public static ChessGameFrame chessGameFrame;
@@ -72,6 +73,7 @@ public class Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {//跳转界面
 
         if (e.getSource() == Game_Start) {
+            t01.over();
             String path = "Music/大按钮的副本.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
             clickMusic.run = true;
@@ -80,7 +82,6 @@ public class Menu extends JFrame implements ActionListener {
             chessGameFrame = mainFrame;
             mainFrame.setVisible(true);
             this.dispose();
-            t01.over();
         }
 
         if (e.getSource() == Game_Over) {

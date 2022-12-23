@@ -1,5 +1,6 @@
 package view;
 
+import Musics.MenuThread;
 import Musics.MyThread;
 import Musics.Test;
 import controller.GameController;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
  */
 public class ChessGameFrame extends JFrame implements ActionListener {
     MyThread t01 = new MyThread("111");
+    public JButton changeBG;
     public JButton regret;
     public JButton music;
     public JButton noMusic;
@@ -89,6 +91,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addExitButton();
         addLoadButton();
         addSaveButton();
+        addChangeBG();
         addCheatingBottom();
         addRedName();
         addBlackName();
@@ -109,7 +112,28 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         add(BackLabel);
         this.setVisible(true);
     }
+    /**
+     * 一键换背景
+     */
+    public void changeBackground(){
+        ImageIcon bg1 = new ImageIcon("imgs/对弈背景2.png");
+        BackLabel.setIcon(bg1);
+    }
+    public void addChangeBG(){
+        changeBG = new JButton("换BG");
+        changeBG.setSize(50,50);
+        changeBG.setLocation(50,50);
+        add(changeBG);
+        setVisible(true);
+        changeBG.addActionListener(e -> {
+            String path1 = "Music/大按钮的副本.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path1);
+            clickMusic.run = true;
+            clickMusic.start();
+            changeBackground();
+        });
 
+    }
 
     /**
      * 在游戏窗体中添加棋盘
@@ -150,6 +174,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             int value = JOptionPane.showConfirmDialog(null, "你确定要重新开始吗？", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (value == JOptionPane.YES_OPTION) {
                 this.dispose();
+                t01.over();
                 gameController.restartGame();
             }
         });
@@ -170,6 +195,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             int value = JOptionPane.showConfirmDialog(null, "     你确定要退出吗？\n本次游戏数据将不会保存", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (value == JOptionPane.YES_OPTION) {
                 this.dispose();
+                t01.over();
                 Menu menu = new Menu(720, 720);
             }
         });
@@ -524,11 +550,13 @@ public class ChessGameFrame extends JFrame implements ActionListener {
                 int n = JOptionPane.showConfirmDialog(null, "红方胜利！是否开始新游戏？", "游戏结束", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (n == JOptionPane.YES_OPTION) {
                     this.dispose();
+                    t01.over();
                     gameController.restartGame();
                     addLabel();
                 }
                 if (n == JOptionPane.NO_OPTION) {
                     this.dispose();
+                    t01.over();
                     Menu menu = new Menu(720, 720);
                     String s1 = String.valueOf(RedCoins);
                     String s2 = String.valueOf(BlackCoins);

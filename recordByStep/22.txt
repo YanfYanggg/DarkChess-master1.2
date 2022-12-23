@@ -1,0 +1,12 @@
+d1 G1 E1 A1 
+em F1 B1 A1 
+D1 C1 C1 E1 
+B1 em a1 A1 
+a1 a1 f1 a1 
+b0 e0 f0 a0 
+e0 c0 b0 F0 
+D0 c0 A0 d0 
+12
+Red is the next
+30
+1
