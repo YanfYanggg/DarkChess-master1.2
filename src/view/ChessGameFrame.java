@@ -19,7 +19,9 @@ import java.util.ArrayList;
  * 3 JButton： 按钮
  */
 public class ChessGameFrame extends JFrame implements ActionListener {
+    int musicClick = 0;
     int click = 0;
+    MyThread newMusic = new MyThread("重新开始");
     MyThread t01 = new MyThread("111");
     public JButton changeBG;
     public JButton regret;
@@ -287,8 +289,6 @@ public class ChessGameFrame extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {//不要点2次cheat！!
         if (e.getSource() == Cheat) {
-            Cheat.setVisible(false);
-            close.setVisible(true);
             String path = "Music/大按钮的副本.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
             clickMusic.run = true;
@@ -302,9 +302,11 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             CheatingFrame.setLayout(null);
             CheatingFrame.setVisible(true);
             target = (ArrayList<String>) chessboard1.ReverseRecord();
-            chessboard1.CheatReverse();
             CheatingFrame.add(chessboard1);
-            setVisible(true);
+            chessboard1.CheatReverse();
+            chessboard1.repaint();
+            close.setVisible(true);
+            Cheat.setVisible(false);
         }
         if (e.getSource() == close) {
             Cheat.setVisible(true);
@@ -590,12 +592,17 @@ public class ChessGameFrame extends JFrame implements ActionListener {
 
         public void actionMusic (ActionEvent e){//跳转界面
             if (e.getSource() == noMusic) {
-                t01.over();
+                if(musicClick ==0 )
+                    t01.over();
+                if(musicClick == 1){
+                    newMusic.over();
+                    click = 0;
+                }
             }
 
             if (e.getSource() == music) {
-                MyThread newMusic = new MyThread("重新开始");
                 newMusic.start();
+                musicClick = 1;
             }
         }
     }

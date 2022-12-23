@@ -18,6 +18,8 @@ import javax.swing.JFrame;
 
 public class Menu extends JFrame implements ActionListener {
     public MenuThread t01 = new MenuThread("桌面背景音乐");
+    public MenuThread newMusic = new MenuThread("重新开始");
+    int click = 0;
     public JButton music;
     public JButton noMusic;
     public static ChessGameFrame chessGameFrame;
@@ -155,12 +157,12 @@ public class Menu extends JFrame implements ActionListener {
     }
 
     public void addMusicButton() {
-        noMusic = new JButton("静音");
+        noMusic = new JButton(new ImageIcon("imgs/pause.png"));
         noMusic.setSize(30, 30);
         noMusic.setLocation(WIDTH * 9 / 10 - 10, 10);
         add(noMusic);
         noMusic.addActionListener(this::actionMusic);
-        music = new JButton("声音");
+        music = new JButton(new ImageIcon("imgs/replay.png"));
         music.setSize(30, 30);
         music.setLocation(WIDTH * 9 / 10 + 30, 10);
         add(music);
@@ -170,12 +172,18 @@ public class Menu extends JFrame implements ActionListener {
 
     public void actionMusic(ActionEvent e) {//跳转界面
         if (e.getSource() == noMusic) {
-            t01.over();
+            if(click == 0){
+                t01.over();
+            }
+            if(click == 1) {
+                newMusic.over();
+                click = 0;
+            }
         }
 
         if (e.getSource() == music) {
-            MyThread newMusic = new MyThread("重新开始");
             newMusic.start();
+            click = 1;
         }
     }
 }
