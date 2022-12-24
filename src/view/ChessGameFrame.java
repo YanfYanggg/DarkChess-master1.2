@@ -1,8 +1,8 @@
 package view;
 
-import Musics.MenuThread;
 import Musics.MyThread;
 import Musics.Test;
+import Musics.myPanel;
 import controller.GameController;
 
 import javax.swing.*;
@@ -19,10 +19,12 @@ import java.util.ArrayList;
  * 3 JButton： 按钮
  */
 public class ChessGameFrame extends JFrame implements ActionListener {
+    int flowerClick = 0;
     int musicClick = 0;
     int click = 0;
     MyThread newMusic = new MyThread("重新开始");
     MyThread t01 = new MyThread("111");
+    public JButton flower;
     public JButton changeBG;
     public JButton regret;
     public JButton music;
@@ -88,6 +90,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addMusicButton();
         t01.start();
         addChessboard();
+        addFlower();
         addLabel();
         addRestartButton();
         addRegret();
@@ -114,6 +117,35 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         BackLabel.setBounds(0, 0, bg.getIconWidth(), bg.getIconHeight());
         add(BackLabel);
         this.setVisible(true);
+    }
+    /**
+     * 送花效果
+     */
+    public void addFlower(){
+        flower = new JButton("送花");
+        flower.setSize(50,50);
+        flower.setLocation(60,10);
+        add(flower);
+        setVisible(true);
+        flower.addActionListener(e -> {
+            String path1 = "Music/大按钮的副本.wav";
+            Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path1);
+            clickMusic.run = true;
+            clickMusic.start();
+            flowerClick++;
+            showFlower();
+        });
+    }
+    public void showFlower(){
+        JFrame frame = new JFrame();
+        frame.setSize(200, 200);
+        frame.setLocationRelativeTo(null);
+        myPanel p = new myPanel();
+        p.setOpaque(false);
+        frame.add(p);
+        Thread t = new Thread(p);
+        t.start();
+        frame.setVisible(true);
     }
     /**
      * 一键换背景
