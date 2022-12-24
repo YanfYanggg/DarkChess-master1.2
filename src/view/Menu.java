@@ -75,15 +75,34 @@ public class Menu extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {//跳转界面
         if (e.getSource() == Game_Start) {
-            t01.over();
             String path = "Music/大按钮的副本.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path);
             clickMusic.run = true;
             clickMusic.start();
-            ChessGameFrame mainFrame = new ChessGameFrame(720, 720);
-            chessGameFrame = mainFrame;
-            mainFrame.setVisible(true);
-            this.dispose();
+            ImageIcon bg = new ImageIcon("imgs/花.png");
+            int value = JOptionPane.showOptionDialog(null, "请选择你想要进行的模式", "选择", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, bg, new String[]{"开始新游戏", "复盘模式", "取消"}, "0");
+            if (value == JOptionPane.YES_OPTION) {
+                t01.over();
+                ChessGameFrame mainFrame = new ChessGameFrame(720, 720);
+                chessGameFrame = mainFrame;
+                mainFrame.setVisible(true);
+                this.dispose();
+            }
+
+            if (value == JOptionPane.NO_OPTION) {
+                String path1 = JOptionPane.showInputDialog(this, "Input path here : ");
+                t01.over();
+                this.dispose();
+                ChessGameFrame reviewFrame = new ChessGameFrame(720, 720);
+                chessGameFrame = reviewFrame;
+                reviewFrame.Review.setVisible(true);
+                reviewFrame.regret.setVisible(false);
+                reviewFrame.close.setVisible(false);
+                reviewFrame.Cheat.setVisible(false);
+                reviewFrame.Load.setVisible(false);
+                reviewFrame.Save.setVisible(false);
+                reviewFrame.gameController.loadGameFromFile(path1);
+            }
         }
 
         if (e.getSource() == Game_Over) {
@@ -115,13 +134,13 @@ public class Menu extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public void addHelp(){
+    public void addHelp() {
         Help = new JButton();
-        Help.setLocation(290,560);
-        Help.setSize(180,60);
+        Help.setLocation(290, 560);
+        Help.setSize(180, 60);
         add(Help);
         Help.addActionListener(e -> {
-            JOptionPane.showConfirmDialog(null,"帮助如下","帮助",JOptionPane.YES_NO_OPTION);
+            JOptionPane.showConfirmDialog(null, "帮助如下", "帮助", JOptionPane.YES_NO_OPTION);
         });
     }
 
@@ -162,7 +181,7 @@ public class Menu extends JFrame implements ActionListener {
         noMusic.setLocation(WIDTH * 9 / 10 - 10, 10);
         add(noMusic);
         noMusic.addActionListener(this::actionMusic);
-        music = new JButton(new ImageIcon("imgs/replay.png"));
+        music = new JButton(new ImageIcon("imgs/play.png"));
         music.setSize(30, 30);
         music.setLocation(WIDTH * 9 / 10 + 30, 10);
         add(music);
@@ -172,10 +191,10 @@ public class Menu extends JFrame implements ActionListener {
 
     public void actionMusic(ActionEvent e) {//跳转界面
         if (e.getSource() == noMusic) {
-            if(click == 0){
+            if (click == 0) {
                 t01.over();
             }
-            if(click == 1) {
+            if (click == 1) {
                 newMusic.over();
                 click = 0;
             }

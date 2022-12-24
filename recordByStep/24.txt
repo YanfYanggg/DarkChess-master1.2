@@ -1,0 +1,12 @@
+F0 C0 C0 A0 
+A0 A1 A0 A1 
+b1 b1 a1 a1 
+B1 B1 D1 D1 
+em F1 E1 E1 
+G1 c1 d1 d1 
+e0 e0 f0 f0 
+g0 a0 a0 a0 
+11
+Red is the next
+5
+0

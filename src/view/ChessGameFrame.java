@@ -24,6 +24,10 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     int click = 0;
     MyThread newMusic = new MyThread("重新开始");
     MyThread t01 = new MyThread("111");
+
+    public JButton Review;//review复盘
+    public JButton Load;
+    public JButton Save;
     public JButton flower;
     public JButton changeBG;
     public JButton regret;
@@ -38,12 +42,12 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     private final int WIDTH;
     private final int HEIGHT;
     public final int CHESSBOARD_SIZE;
-    private JButton close;
-    private JButton Cheat;
+    public JButton close;
+    public JButton Cheat;
     public JTextField redCredit = new JTextField("0", 2);
     public JTextField blackCredit = new JTextField("0", 2);
     public JLabel ProgressS = new JLabel("1");
-    private GameController gameController;
+    public GameController gameController;
     private static JLabel beginLabel;
     int countRA = 0;
     int countRM = 0;
@@ -90,6 +94,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         addMusicButton();
         t01.start();
         addChessboard();
+        addReview();
         addFlower();
         addLabel();
         addRestartButton();
@@ -118,6 +123,27 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         add(BackLabel);
         this.setVisible(true);
     }
+    /**
+     * 播放存档
+     */
+    public void addReview(){
+        Review = new JButton("Play");
+        Review.setLocation(WIDTH * 3 / 5 + 20, HEIGHT / 10 + 70);
+        Review.setSize(100, 60);
+        Review.setFont(new Font("Rockwell", Font.BOLD, 20));
+        Review.setBackground(Color.LIGHT_GRAY);
+        add(Review);
+        Review.addActionListener(e -> {
+
+           //复盘内容
+
+        });
+        Review.setVisible(false);
+    }
+
+
+
+
     /**
      * 送花效果
      */
@@ -255,13 +281,13 @@ public class ChessGameFrame extends JFrame implements ActionListener {
      * 按下load按钮输入读档路径
      */
     private void addLoadButton() {
-        JButton button = new JButton("Load");
-        button.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 70);
-        button.setSize(100, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        button.setBackground(Color.LIGHT_GRAY);
-        add(button);
-        button.addActionListener(e -> {
+        Load = new JButton("Load");
+        Load.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 70);
+        Load.setSize(100, 60);
+        Load.setFont(new Font("Rockwell", Font.BOLD, 20));
+        Load.setBackground(Color.LIGHT_GRAY);
+        add(Load);
+        Load.addActionListener(e -> {
             String path1 = "Music/大按钮的副本.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path1);
             clickMusic.run = true;
@@ -276,13 +302,13 @@ public class ChessGameFrame extends JFrame implements ActionListener {
      * 按下save按钮存档
      */
     public void addSaveButton() {
-        JButton button = new JButton("Save");
-        button.setLocation(WIDTH * 3 / 5 + 100, HEIGHT / 10 + 70);
-        button.setSize(80, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        button.setBackground(Color.LIGHT_GRAY);
-        add(button);
-        button.addActionListener(e -> {
+        Save = new JButton("Save");
+        Save.setLocation(WIDTH * 3 / 5 + 100, HEIGHT / 10 + 70);
+        Save.setSize(80, 60);
+        Save.setFont(new Font("Rockwell", Font.BOLD, 20));
+        Save.setBackground(Color.LIGHT_GRAY);
+        add(Save);
+        Save.addActionListener(e -> {
             String path1 = "Music/大按钮的副本.wav";
             Test.AudioPlay2 clickMusic = new Test.AudioPlay2(path1);
             clickMusic.run = true;
