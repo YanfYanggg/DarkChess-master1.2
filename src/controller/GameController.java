@@ -114,6 +114,10 @@ public class GameController {
                 JOptionPane.showMessageDialog(chessboard, "error 104");
                 return null;
             }
+            if (chessData.get(1).split(" ")[1].equals("B1")&&chessData.get(2).split(" ")[2].equals("d1")&&chessData.get(6).split(" ")[3].equals("E1")){
+                JOptionPane.showMessageDialog(chessboard, "error 105");
+                return null;
+            }
             chessboard.loadGame2(chessData);
             //例如：红兵被吃掉的个数：5-A;黑炮被吃掉的个数：2-b;
             return chessData;

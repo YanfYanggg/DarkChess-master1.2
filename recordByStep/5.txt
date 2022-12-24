@@ -1,12 +1,12 @@
-f0 a1 D1 C0 
-C1 g1 c1 a0 
-E0 d0 A0 e0 
-e0 b0 E0 A0 
-G0 d0 a0 A0 
-F0 f0 c0 F0 
-a0 B0 A0 b0 
-A0 a0 B0 D0 
+f0 F0 A0 e0 
+g0 c0 A0 a0 
+A0 D1 a1 a1 
+f0 C1 F1 b0 
+e0 b0 B0 C0 
+D0 G0 A0 a0 
+a0 E0 d0 B0 
+A0 E0 d0 c0 
 3
-Red is the next
+Black is the next
 0
 0
