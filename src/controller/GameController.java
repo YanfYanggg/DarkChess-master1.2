@@ -134,6 +134,11 @@ public class GameController {
             chessboard.loadGame2(loadGameFromFile(String.format("recordByStep/%d.txt",chessboard.step)));
         }
     }
+    int fupan=1;
+    public void REView(){
+        chessboard.loadGame2(loadGameFromFile(String.format("recordByStep/%d.txt",fupan)));
+        fupan++;
+    }
 
     public void restartGame() {
         for (int i = 0; i < 1000; i++) {
@@ -141,6 +146,7 @@ public class GameController {
             file.delete();
         }
         chessboard.step=0;
+        fupan=1;
         Menu.chessGameFrame = new ChessGameFrame(720, 720);
 
     }

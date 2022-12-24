@@ -126,7 +126,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     /**
      * 播放存档
      */
-    public void addReview(){
+    public void  addReview(){
         Review = new JButton("Play");
         Review.setLocation(WIDTH * 3 / 5 + 20, HEIGHT / 10 + 70);
         Review.setSize(100, 60);
@@ -134,9 +134,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         Review.setBackground(Color.LIGHT_GRAY);
         add(Review);
         Review.addActionListener(e -> {
-
-           //复盘内容
-
+            gameController.REView();
         });
         Review.setVisible(false);
     }
