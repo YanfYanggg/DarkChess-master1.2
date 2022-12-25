@@ -15,6 +15,8 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.List;
 
+import static view.Menu.chessGameFrame;
+
 /**
  * 这个类表示棋盘组建，其包含：
  * SquareComponent[][]: 4*8个方块格子组件
@@ -140,48 +142,48 @@ public class Chessboard extends JComponent implements Cloneable {
             remove(chess2);
             if (ChessBeEaten.getChessColor() == ChessColor.RED) {
                 if (ChessBeEaten.getRank() == 1) {
-                    Menu.chessGameFrame.countRS++;
-                    Menu.chessGameFrame.RSoldier.setText(String.valueOf(Menu.chessGameFrame.countRS));
+                    chessGameFrame.countRS++;
+                    chessGameFrame.RSoldier.setText(String.valueOf(chessGameFrame.countRS));
                 } else if (ChessBeEaten.getRank() == 2) {
-                    Menu.chessGameFrame.countRPao++;
-                    Menu.chessGameFrame.RCannon.setText(String.valueOf(Menu.chessGameFrame.countRPao));
+                    chessGameFrame.countRPao++;
+                    chessGameFrame.RCannon.setText(String.valueOf(chessGameFrame.countRPao));
                 } else if (ChessBeEaten.getRank() == 3) {
-                    Menu.chessGameFrame.countRChe++;
-                    Menu.chessGameFrame.RChariot.setText(String.valueOf(Menu.chessGameFrame.countRChe));
+                    chessGameFrame.countRChe++;
+                    chessGameFrame.RChariot.setText(String.valueOf(chessGameFrame.countRChe));
                 } else if (ChessBeEaten.getRank() == 4) {
-                    Menu.chessGameFrame.countRH++;
-                    Menu.chessGameFrame.RHorse.setText(String.valueOf(Menu.chessGameFrame.countRH));
+                    chessGameFrame.countRH++;
+                    chessGameFrame.RHorse.setText(String.valueOf(chessGameFrame.countRH));
                 } else if (ChessBeEaten.getRank() == 5) {
-                    Menu.chessGameFrame.countRM++;
-                    Menu.chessGameFrame.RMinister.setText(String.valueOf(Menu.chessGameFrame.countRM));
+                    chessGameFrame.countRM++;
+                    chessGameFrame.RMinister.setText(String.valueOf(chessGameFrame.countRM));
                 } else if (ChessBeEaten.getRank() == 6) {
-                    Menu.chessGameFrame.countRA++;
-                    Menu.chessGameFrame.RAdvisor.setText(String.valueOf(Menu.chessGameFrame.countRA));
+                    chessGameFrame.countRA++;
+                    chessGameFrame.RAdvisor.setText(String.valueOf(chessGameFrame.countRA));
                 } else {
-                    Menu.chessGameFrame.RGeneral.setText("1");
+                    chessGameFrame.RGeneral.setText("1");
                 }
             }
             if (ChessBeEaten.getChessColor() == ChessColor.BLACK) {
                 if (ChessBeEaten.getRank() == 1) {
-                    Menu.chessGameFrame.countBS++;
-                    Menu.chessGameFrame.BSoldier.setText(String.valueOf(Menu.chessGameFrame.countBS));
+                    chessGameFrame.countBS++;
+                    chessGameFrame.BSoldier.setText(String.valueOf(chessGameFrame.countBS));
                 } else if (ChessBeEaten.getRank() == 2) {
-                    Menu.chessGameFrame.countBPao++;
-                    Menu.chessGameFrame.BCannon.setText(String.valueOf(Menu.chessGameFrame.countBPao));
+                    chessGameFrame.countBPao++;
+                    chessGameFrame.BCannon.setText(String.valueOf(chessGameFrame.countBPao));
                 } else if (ChessBeEaten.getRank() == 3) {
-                    Menu.chessGameFrame.countBChe++;
-                    Menu.chessGameFrame.BChariot.setText(String.valueOf(Menu.chessGameFrame.countBChe));
+                    chessGameFrame.countBChe++;
+                    chessGameFrame.BChariot.setText(String.valueOf(chessGameFrame.countBChe));
                 } else if (ChessBeEaten.getRank() == 4) {
-                    Menu.chessGameFrame.countBH++;
-                    Menu.chessGameFrame.BHorse.setText(String.valueOf(Menu.chessGameFrame.countBH));
+                    chessGameFrame.countBH++;
+                    chessGameFrame.BHorse.setText(String.valueOf(chessGameFrame.countBH));
                 } else if (ChessBeEaten.getRank() == 5) {
-                    Menu.chessGameFrame.countBM++;
-                    Menu.chessGameFrame.BMinister.setText(String.valueOf(Menu.chessGameFrame.countBM));
+                    chessGameFrame.countBM++;
+                    chessGameFrame.BMinister.setText(String.valueOf(chessGameFrame.countBM));
                 } else if (ChessBeEaten.getRank() == 6) {
-                    Menu.chessGameFrame.countBA++;
-                    Menu.chessGameFrame.BAdvisor.setText(String.valueOf(Menu.chessGameFrame.countBA));
+                    chessGameFrame.countBA++;
+                    chessGameFrame.BAdvisor.setText(String.valueOf(chessGameFrame.countBA));
                 } else {
-                    Menu.chessGameFrame.BGeneral.setText("1");
+                    chessGameFrame.BGeneral.setText("1");
                 }
             }
 
@@ -204,9 +206,9 @@ public class Chessboard extends JComponent implements Cloneable {
 
         String s1 = String.valueOf(getRed_score());
         String s2 = String.valueOf(getBlack_score());
-        Menu.chessGameFrame.redCredit.setText(s1);
-        Menu.chessGameFrame.blackCredit.setText(s2);
-        Menu.chessGameFrame.judgeWinner();
+        chessGameFrame.redCredit.setText(s1);
+        chessGameFrame.blackCredit.setText(s2);
+        chessGameFrame.judgeWinner();
     }
 
     //增加一个方法，先弄出一个list，再按list中的数字给棋子初始化
@@ -715,8 +717,8 @@ public class Chessboard extends JComponent implements Cloneable {
         }
         initialGameByCharacters2(chesses);
         clickController.setProgress(Integer.parseInt(chessData.get(8)));
-        Menu.chessGameFrame.ProgressS.setText(chessData.get(8));
-        Menu.chessGameFrame.ProgressS.setText(chessData.get(8));
+        chessGameFrame.ProgressS.setText(chessData.get(8));
+        chessGameFrame.ProgressS.setText(chessData.get(8));
         if (chessData.get(9).equals("Red is the next")) {
             currentColor = ChessColor.RED;
         } else if (chessData.get(9).equals("Black is the next")) {
@@ -724,9 +726,9 @@ public class Chessboard extends JComponent implements Cloneable {
         }
         ChessGameFrame.getBeginLabel().setText(String.format("%s's TURN", currentColor.getName()));
         setRed_score(Integer.parseInt(chessData.get(10)));
-        Menu.chessGameFrame.redCredit.setText(chessData.get(10));
+        chessGameFrame.redCredit.setText(chessData.get(10));
         setBlack_score(Integer.parseInt(chessData.get(11)));
-        Menu.chessGameFrame.blackCredit.setText(chessData.get(11));
+        chessGameFrame.blackCredit.setText(chessData.get(11));
     }
 
     public void initialGameByCharacters2(String[][] chesses) {
