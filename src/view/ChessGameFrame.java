@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,7 +156,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         Review.setBackground(Color.LIGHT_GRAY);
         add(Review);
         Review.addActionListener(e -> {
-            gameController.REView();
+            REView();
         });
         Review.setVisible(false);
     }
@@ -705,5 +706,18 @@ public class ChessGameFrame extends JFrame implements ActionListener {
             newMusic.start();
             musicClick = 1;
         }
+    }
+    public void REView(){
+        try {
+            chessboard1.loadGame2(gameController.loadGameFromFile(String.format("recordByStep/%d.txt",gameController.fupan)));
+        }catch (NoSuchFileException e){
+            int value =JOptionPane.showConfirmDialog(null, "复盘已结束，请退出", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (value == JOptionPane.YES_OPTION) {
+                this.dispose();
+                t01.over();
+                Menu menu = new Menu(720, 720);
+            }
+        }
+        gameController.fupan++;
     }
 }
