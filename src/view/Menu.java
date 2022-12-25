@@ -35,10 +35,10 @@ public class Menu extends JFrame implements ActionListener {
     public JTextField blackCoinsKuang;
     public JLabel blackRank;
 
-    private static JLabel TitleLabel;
-
     public Menu(int width, int height) {
-
+        ChessGameFrame chessGameFrame1 = new ChessGameFrame(720,720);
+        chessGameFrame = chessGameFrame1;
+        chessGameFrame1.setVisible(false);
         setTitle("Dark Chess Menu"); //设置标题
         this.WIDTH = width;
         this.HEIGHT = height;
@@ -85,9 +85,8 @@ public class Menu extends JFrame implements ActionListener {
             int value = JOptionPane.showOptionDialog(null, "请选择你想要进行的模式", "选择", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, bg, new String[]{"开始新游戏", "复盘模式", "取消"}, "0");
             if (value == JOptionPane.YES_OPTION) {
                 t01.over();
-                ChessGameFrame mainFrame = new ChessGameFrame(720, 720);
-                chessGameFrame = mainFrame;
-                mainFrame.setVisible(true);
+                chessGameFrame.setVisible(true);
+                chessGameFrame.t01.start();
                 this.dispose();
             }
 
@@ -96,15 +95,15 @@ public class Menu extends JFrame implements ActionListener {
                 if(!path1.equals(null)) {
                     t01.over();
                     this.dispose();
-                    ChessGameFrame reviewFrame = new ChessGameFrame(720, 720);
-                    chessGameFrame = reviewFrame;
-                    reviewFrame.Review.setVisible(true);
-                    reviewFrame.regret.setVisible(false);
-                    reviewFrame.close.setVisible(false);
-                    reviewFrame.Cheat.setVisible(false);
-                    reviewFrame.Load.setVisible(false);
-                    reviewFrame.Save.setVisible(false);
-                    reviewFrame.gameController.loadGameFromFile(path1);
+                    chessGameFrame.setVisible(true);
+                    chessGameFrame.t01.start();
+                    chessGameFrame.Review.setVisible(true);
+                    chessGameFrame.regret.setVisible(false);
+                    chessGameFrame.close.setVisible(false);
+                    chessGameFrame.Cheat.setVisible(false);
+                    chessGameFrame.Load.setVisible(false);
+                    chessGameFrame.Save.setVisible(false);
+                    chessGameFrame.gameController.loadGameFromFile(path1);
                 }
             }
         }
@@ -160,7 +159,8 @@ public class Menu extends JFrame implements ActionListener {
         redRank.setSize(100, 100);
         redRank.setLocation(60, 80);
         add(redRank);
-        redCoinsKuang = new JTextField("0", 3);
+        String s1 = String.valueOf(chessGameFrame.RedCoins);
+        redCoinsKuang = new JTextField(s1, 3);
         redCoinsKuang.setEditable(false);
         redCoinsKuang.setSize(36, 20);
         redCoinsKuang.setLocation(170, 115);
@@ -170,7 +170,8 @@ public class Menu extends JFrame implements ActionListener {
         blackRank.setSize(100, 100);
         blackRank.setLocation(60, 110);
         add(blackRank);
-        blackCoinsKuang = new JTextField("0", 3);
+        String s2 = String.valueOf(chessGameFrame.BlackCoins);
+        blackCoinsKuang = new JTextField(s2, 3);
         blackCoinsKuang.setEditable(false);
         blackCoinsKuang.setSize(36, 20);
         blackCoinsKuang.setLocation(170, 150);

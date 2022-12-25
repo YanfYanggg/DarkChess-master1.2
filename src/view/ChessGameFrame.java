@@ -29,7 +29,7 @@ public class ChessGameFrame extends JFrame implements ActionListener {
     int musicClick = 0;
     int click = 0;
     MyThread newMusic = new MyThread("重新开始");
-    MyThread t01 = new MyThread("111");
+    public MyThread t01 = new MyThread("111");
 
     public JButton Review;//review复盘
     public JButton Load;
@@ -107,14 +107,12 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         this.WIDTH = width;
         this.HEIGHT = height;
         this.CHESSBOARD_SIZE = HEIGHT * 4 / 5;
-
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null); // Center the window.
         getContentPane().setBackground(Color.WHITE);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
         addMusicButton();
-        t01.start();
         addChessboard();
         addReview();
         addFlower();

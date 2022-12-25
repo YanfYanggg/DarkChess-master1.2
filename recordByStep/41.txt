@@ -1,0 +1,12 @@
+F0 d1 f1 E1 
+B1 em C1 C1 
+a1 B1 b1 em 
+A1 A1 em em 
+em D1 em b1 
+em a1 a1 em 
+F1 em em A1 
+a1 f1 E1 c0 
+21
+Black is the next
+51
+37

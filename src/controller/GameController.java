@@ -148,6 +148,6 @@ public class GameController {
         chessboard.step=0;
         fupan=1;
         Menu.chessGameFrame = new ChessGameFrame(720, 720);
-
+        Menu.chessGameFrame.t01.start();
     }
 }
