@@ -9,10 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -708,7 +705,16 @@ public class ChessGameFrame extends JFrame implements ActionListener {
         }
     }
     public void REView(){
-        chessboard1.loadGame2(gameController.loadGameFromFile(String.format("recordByStep/%d.txt",gameController.fupan)));
+        try {
+            chessboard1.loadGame2(gameController.loadGameFromFile(String.format("recordByStep/%d.txt",gameController.fupan)));
+        }catch (RuntimeException e){
+            int value =JOptionPane.showConfirmDialog(null, "复盘已结束，请退出", "请确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (value == JOptionPane.YES_OPTION) {
+                this.dispose();
+                t01.over();
+                Menu menu = new Menu(720, 720);
+            }
+        }
         gameController.fupan++;
     }
 }
