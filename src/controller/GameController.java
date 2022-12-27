@@ -102,7 +102,7 @@ public class GameController {
                             break;
                         default:
                             JOptionPane.showMessageDialog(chessboard, "error 103");
-                            break;
+                            return null;
                     }
                     }
                 }
