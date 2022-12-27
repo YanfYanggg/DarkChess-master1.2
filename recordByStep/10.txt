@@ -1,12 +1,12 @@
-F0 C0 C0 A0 
+B1 B1 C0 A0 
 A0 A0 A0 A0 
-b1 b1 a0 a0 
-B1 B1 D0 D0 
-G1 F1 E0 E0 
+em em a0 a0 
+em em D0 D0 
+b1 b1 E0 E0 
 c0 c0 d0 d0 
 e0 e0 f0 f0 
 g0 a0 a0 a0 
-4
+6
 Black is the next
 0
-0
+55

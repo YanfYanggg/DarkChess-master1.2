@@ -102,7 +102,7 @@ public class GameController {
                             break;
                         default:
                             JOptionPane.showMessageDialog(chessboard, "error 103");
-                            break;
+                            return null;
                     }
                     }
                 }
@@ -112,6 +112,10 @@ public class GameController {
             }
             if (!chessData.get(9).split(" ")[1].equals("is")){
                 JOptionPane.showMessageDialog(chessboard, "error 104");
+                return null;
+            }
+            if (chessData.get(1).split(" ")[1].equals("B1")&&chessData.get(2).split(" ")[2].equals("d1")&&chessData.get(6).split(" ")[3].equals("E1")){
+                JOptionPane.showMessageDialog(chessboard, "error 105");
                 return null;
             }
             chessboard.loadGame2(chessData);
